@@ -31,6 +31,7 @@
     GeneticAlgorithmModel *_genAlrorithm;
     
     PlotView *_plot;
+    BOOL _isRedrawingNow;
 }
 @end
 
@@ -94,6 +95,12 @@
     [self.view addSubview:_plot];
     
     [self.activIndicator removeFromSuperview];
+    
+   
+    UITapGestureRecognizer* doubleTap = [[UITapGestureRecognizer alloc] initWithTarget: self action: @selector (handleDoubleTap:)];
+    [doubleTap setDelaysTouchesBegan: YES];
+    [doubleTap setNumberOfTapsRequired: 2];
+    [_plot addGestureRecognizer: doubleTap];
 }
 
 - (void)viewDidUnload
@@ -235,17 +242,7 @@
 - (IBAction)mix_maxAction:(id)sender {
     _genAlrorithm.isSearchMax = !_genAlrorithm.isSearchMax;
     
-    
     [self regenerateAction:nil];
-    
-    // redraw plot
-//    [self.view addSubview:self.activIndicator];
-//    [self.activIndicator startAnimating];
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-//        [_plot redraw];
-//        [self.activIndicator startAnimating];
-//        [self.activIndicator removeFromSuperview];
-//    });
 }
 
 - (IBAction)regenerateAction:(id)sender {
@@ -261,7 +258,7 @@
 
 - (IBAction)calculateAction:(id)sender {
     
-    NSArray *result = [_genAlrorithm nextIteration]; // ? dispatch_async ??
+    NSArray *result = [_genAlrorithm nextIteration];
     [_tableViewControl.sections addObject:result];
     [_tableViewControl reloadTableView];
 }
@@ -270,6 +267,33 @@
     
     _genAlrorithm.tableView = _tableViewControl;
     [_genAlrorithm start];
+}
+
+- (void)handleDoubleTap:(UITapGestureRecognizer*)sender
+{
+//    CGPoint tap = [sender locationInView:self.view];
+
+    if(!_isRedrawingNow) {
+        [self redrawPlot];
+    }
+}
+
+- (void)redrawPlot {
+    
+    _isRedrawingNow = YES;
+    [self.view addSubview:self.activIndicator];
+    [self.activIndicator startAnimating];
+    dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        [_plot redraw];
+        NSLog(@"called1");
+    });
+    
+    dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        [self.activIndicator stopAnimating];
+        [self.activIndicator removeFromSuperview];
+        _isRedrawingNow = NO;
+        NSLog(@"called2");
+    });
 }
 
 

@@ -29,9 +29,6 @@
 {
     self = [super init];
     if(self) {
-//        _aParam = 1;
-//        _bParam = 1;
-//        _cParam = 1;
         _a0Param = 2;
         _a1Param = 0;
         _a2Param = 1;
@@ -94,14 +91,11 @@
     parents = [self mutateAPopulation:parents];
     
     _previousPopulation = _currentPopulation;
+
     NSArray *bestFromBoth = [self chooseBestFromParent:parents childred:_currentPopulation];
-//    _currentPopulation = [self chooseBestFromParent:parents childred:_currentPopulation];
-    //_currentPopulation = [self findBestFromParents:parents children:_currentPopulation best:bestFromBoth];
     _currentPopulation = [self tmpParents:parents children:_currentPopulation best:bestFromBoth];
-    
     _currentIteration++;
     
-    //return parents;
     return [self makePublicPopulation:parents];
 }
 
