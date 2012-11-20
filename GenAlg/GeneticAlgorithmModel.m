@@ -65,7 +65,7 @@
     BOOL isFound = NO;
     NSArray *result;
     
-    int iterations = 5+arc4random()%5;
+    int iterations = 7+arc4random()%5;
     
     do {
         result = [self nextIteration];
@@ -276,6 +276,7 @@
     return maxInd;
 }
 
+// checking if need to stop (if best elem found)
 - (BOOL)isBestElementsFoundInCurrentPopulation:(NSArray *)curPopulation previousPopulation:(NSArray *)prevPopulation {
     
     assert(curPopulation.count == prevPopulation.count);
@@ -434,7 +435,7 @@
     for (int i=0; i<adaptions.count; i++) {
         [individsProbabilities addObject: [NSNumber numberWithFloat: ((NSNumber *)[adaptions objectAtIndex:i]).floatValue/sum]];
     }
-    NSLog(@"individs probabilities: %@", individsProbabilities);
+   // NSLog(@"individs probabilities: %@", individsProbabilities);
     return individsProbabilities;
 }
 
