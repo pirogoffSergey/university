@@ -28,5 +28,7 @@
 - (IBAction)mix_maxAction:(id)sender;
 - (IBAction)regenerateAction:(id)sender;
 - (IBAction)calculateAction:(id)sender;
+- (IBAction)startAction:(id)sender;
+
 
 @end

@@ -15,6 +15,7 @@
     NSMutableArray *_publicFirstPopulation; //consists of GAIndivid objects
     
     NSArray *_currentPopulation;
+    NSArray *_previousPopulation;
     int _currentIteration;
     
     NSMutableArray *_populationsOfIndivids;
@@ -39,8 +40,8 @@
         
         self.isSearchMax = YES;
         
-        _leftBorder = -10;
-        _rightBorder = 10;
+        _leftBorder = -1;
+        _rightBorder = 0;
         
         _binaryCodeLength = 12;
         _maxIterationsCount = 20;
@@ -62,6 +63,25 @@
 #pragma mark -
 #pragma mark Public Methods
 
+- (void)start {
+    
+    BOOL isFound = NO;
+    NSArray *result;
+    
+    int iterations = 5+arc4random()%5;
+    
+    do {
+        result = [self nextIteration];
+        [self.tableView.sections addObject:result];
+        [self.tableView reloadTableView];
+        isFound = [self isBestElementsFoundInCurrentPopulation:_currentPopulation
+                                                 previousPopulation:_previousPopulation];
+    }while ((isFound==NO) || (_currentIteration<iterations));
+    
+    NSLog(@"finished!");
+    NSLog(@"spent: %d iterations", _currentIteration);
+}
+
 - (NSArray *)nextIteration
 {
     if(!_currentIteration) {
@@ -73,6 +93,7 @@
     parents = [self crossingOverAPopulation:parents];
     parents = [self mutateAPopulation:parents];
     
+    _previousPopulation = _currentPopulation;
     NSArray *bestFromBoth = [self chooseBestFromParent:parents childred:_currentPopulation];
 //    _currentPopulation = [self chooseBestFromParent:parents childred:_currentPopulation];
     //_currentPopulation = [self findBestFromParents:parents children:_currentPopulation best:bestFromBoth];
@@ -217,8 +238,8 @@
     if(fabs(x1-x2) >= deltaX &&
        fabs(y1-y2) <= deltaY) {
         
-        NSLog(@"ind1: %@", [self arrayToString:anIndivid]);
-        NSLog(@"std: %@", [self arrayToString:standard]);
+//        NSLog(@"ind1: %@", [self arrayToString:anIndivid]);
+//        NSLog(@"std: %@", [self arrayToString:standard]);
         return YES;
     }
     return NO;
@@ -259,6 +280,31 @@
         }
     }
     return maxInd;
+}
+
+- (BOOL)isBestElementsFoundInCurrentPopulation:(NSArray *)curPopulation previousPopulation:(NSArray *)prevPopulation {
+    
+    assert(curPopulation.count == prevPopulation.count);
+    
+    //found best from cur
+    int bestCurIndx = [self findIndividWithMaxYValueInPopulation:curPopulation];
+    NSArray *bestCurElem = [curPopulation objectAtIndex:bestCurIndx];
+    
+    int bestPrevIndx = [self findIndividWithMaxYValueInPopulation:prevPopulation];
+    NSArray *bestPrevElem = [prevPopulation objectAtIndex:bestPrevIndx];
+    
+    double curX = [self valueOfIndivid:bestCurElem];
+    double prevX = [self valueOfIndivid:bestPrevElem];
+    
+    double curY = [self f:curX];
+    double prevY =[self f:prevX];
+    
+    if(fabs(curY - prevY) <= 0.001) {
+        return YES;
+    }
+    else {
+        return NO;
+    }
 }
 
 
@@ -343,8 +389,8 @@
 {
     assert([one count] == [second count]);
     
-    NSLog(@"one: %@", [self arrayToString:one]);
-    NSLog(@"scnd: %@", [self arrayToString:second]);
+//    NSLog(@"one: %@", [self arrayToString:one]);
+//    NSLog(@"scnd: %@", [self arrayToString:second]);
     
     float oneInt = [self valueOfIndivid:one];
     float secondInt = [self valueOfIndivid:second];

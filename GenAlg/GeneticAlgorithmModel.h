@@ -10,9 +10,14 @@
 #import "GAIndivid.h"
 #import "PlotView.h"
 
+#import "CustomTableViewController.h"
+
 @interface GeneticAlgorithmModel : NSObject <PlotViewProtocol>
 
 //function is: ax^2 + bx + c
+
+
+@property (nonatomic, strong) CustomTableViewController *tableView;
 
 @property (nonatomic, assign) int a0Param;
 @property (nonatomic, assign) int a1Param;
@@ -32,6 +37,8 @@
 
 @property (nonatomic, assign) BOOL isSearchMax;
 
+
+- (void)start;
 
 - (NSArray *)nextIteration; //returns array of GAIndivids
 - (float)valueOfIndivid:(NSArray *)anIndivid;

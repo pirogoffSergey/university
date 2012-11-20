@@ -233,9 +233,6 @@
 #pragma mark Actions
 
 - (IBAction)mix_maxAction:(id)sender {
-//    UISegmentedControl *control = (UISegmentedControl *)sender;
-
-    //NSLog(@"UISegmentedControl selected: %d",control.selectedSegmentIndex);
     _genAlrorithm.isSearchMax = !_genAlrorithm.isSearchMax;
     
     
@@ -267,6 +264,12 @@
     NSArray *result = [_genAlrorithm nextIteration]; // ? dispatch_async ??
     [_tableViewControl.sections addObject:result];
     [_tableViewControl reloadTableView];
+}
+
+- (IBAction)startAction:(id)sender {
+    
+    _genAlrorithm.tableView = _tableViewControl;
+    [_genAlrorithm start];
 }
 
 
