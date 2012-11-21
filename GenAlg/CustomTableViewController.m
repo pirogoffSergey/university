@@ -16,7 +16,6 @@
 @end
 
 
-
 @implementation CustomTableViewController
 
 - (id)initWithFrame:(CGRect)aFramee
@@ -36,12 +35,9 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
+    self.tableView.allowsMultipleSelection = YES;
+    
     self.sections = [NSMutableArray array];
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -49,14 +45,55 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+
+#pragma mark -
+#pragma mark Public Methods
+
 - (void)reloadTableView
 {
     [self.tableView reloadData];
 }
 
+- (void)selectCellAtIndexPathAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:nil];
+}
+
+- (void)deselectCellAtIndexPath:(NSIndexPath *)indexPath {
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)deselectAllCells {
+    NSArray *selectedIndexes = [self.tableView indexPathsForSelectedRows];
+
+    for(NSIndexPath *indx in selectedIndexes) {
+        [self deselectCellAtIndexPath:indx];
+    }
+}
+
+- (void)selectCellsWithMaxElements {
+    
+    GAIndivid *individ;
+    int indexMax = 0;
+    
+    NSArray *lastSection = [self.sections objectAtIndex:self.sections.count-1];
+    GAIndivid *maxIndivid = (GAIndivid *)[lastSection objectAtIndex:0];
+    
+    for(int i=0; i<lastSection.count; i++) {
+        individ =  (GAIndivid *)[lastSection objectAtIndex:i];
+        
+        if(individ.fitness.doubleValue > maxIndivid.fitness.doubleValue) {
+            individ = maxIndivid;
+            indexMax = i;
+        }
+    }
+    
+    [self selectCellAtIndexPathAtIndexPath:[NSIndexPath indexPathForRow:indexMax inSection:self.sections.count-1]];
+}
 
 
-#pragma mark - Table view delegate
+#pragma mark - 
+#pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

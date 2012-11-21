@@ -16,5 +16,9 @@
 - (id)initWithFrame:(CGRect)aFrame;
 - (void)reloadTableView;
 
+- (void)selectCellsWithMaxElements;
+- (void)selectCellAtIndexPathAtIndexPath:(NSIndexPath *)indexPath;
+- (void)deselectCellAtIndexPath:(NSIndexPath *)indexPath;
+- (void)deselectAllCells;
 
 @end

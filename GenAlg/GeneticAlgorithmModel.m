@@ -77,6 +77,8 @@
     
     NSLog(@"finished!");
     NSLog(@"spent: %d iterations", _currentIteration);
+    
+//    [_tableView sele]
 }
 
 - (NSArray *)nextIteration

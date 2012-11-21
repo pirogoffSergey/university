@@ -265,8 +265,12 @@
 
 - (IBAction)startAction:(id)sender {
     
+    [_tableViewControl deselectAllCells];
+    
     _genAlrorithm.tableView = _tableViewControl;
     [_genAlrorithm start];
+    
+    [_tableViewControl selectCellsWithMaxElements];
 }
 
 - (void)handleDoubleTap:(UITapGestureRecognizer*)sender
