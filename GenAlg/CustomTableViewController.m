@@ -76,17 +76,25 @@
     GAIndivid *individ;
     int indexMax = 0;
     
-    NSArray *lastSection = [self.sections objectAtIndex:self.sections.count-1];
+    NSMutableArray *lastSection = [NSMutableArray arrayWithArray:[self.sections objectAtIndex:self.sections.count-1]];
+
     GAIndivid *maxIndivid = (GAIndivid *)[lastSection objectAtIndex:0];
+    NSArray *prevIndivid;
     
-    for(int i=0; i<lastSection.count; i++) {
-        individ =  (GAIndivid *)[lastSection objectAtIndex:i];
-        
-        if(individ.fitness.doubleValue > maxIndivid.fitness.doubleValue) {
-            individ = maxIndivid;
-            indexMax = i;
+    //do {
+        for(int i=0; i<lastSection.count; i++) {
+            individ =  (GAIndivid *)[lastSection objectAtIndex:i];
+            
+            if(individ.fitness.doubleValue > maxIndivid.fitness.doubleValue) {
+                individ = maxIndivid;
+                indexMax = i;
+            }
         }
-    }
+        
+        //check
+        [self selectCellAtIndexPathAtIndexPath:[NSIndexPath indexPathForRow:indexMax inSection:self.sections.count-1]];
+        
+   // }while (true);
     
     [self selectCellAtIndexPathAtIndexPath:[NSIndexPath indexPathForRow:indexMax inSection:self.sections.count-1]];
 }

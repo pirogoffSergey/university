@@ -49,4 +49,6 @@
 - (NSString *)roundNumber:(float)number;
 + (NSString *)roundNumber:(float)number;
 
+- (BOOL)isIndivid:(NSArray *)anIndivid likeAnotherIndivid:(NSArray *)standard;
+
 @end
