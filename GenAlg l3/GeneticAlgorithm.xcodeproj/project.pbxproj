@@ -1,0 +1,387 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		30015A801685F73200014433 /* GAInequality.m in Sources */ = {isa = PBXBuildFile; fileRef = 30015A7F1685F73200014433 /* GAInequality.m */; };
+		3016C3171603BD2D00D1CBDB /* GeneticAlgorithmModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3016C3161603BD2D00D1CBDB /* GeneticAlgorithmModel.m */; };
+		301B16CF1601C03E002D43CB /* CustomTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 301B16CD1601C03E002D43CB /* CustomTableViewController.m */; };
+		301B16D01601C03E002D43CB /* CustomTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 301B16CE1601C03E002D43CB /* CustomTableViewController.xib */; };
+		306708A816830302003C5E57 /* GeneticAlgorithmModelNew.m in Sources */ = {isa = PBXBuildFile; fileRef = 306708A716830302003C5E57 /* GeneticAlgorithmModelNew.m */; };
+		306708AE1683083B003C5E57 /* GAInequalitiesSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 306708AD1683083B003C5E57 /* GAInequalitiesSystem.m */; };
+		3075383A16061C6600AD053F /* GAIndivid.m in Sources */ = {isa = PBXBuildFile; fileRef = 3075383916061C6600AD053F /* GAIndivid.m */; };
+		3090B7671682F05500CECC1F /* IndividCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3090B7661682F05500CECC1F /* IndividCell.m */; };
+		3090B7691682F0F100CECC1F /* IndividCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3090B7681682F0F100CECC1F /* IndividCellView.xib */; };
+		30DB489D162613A8002958EB /* PlotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DB489C162613A8002958EB /* PlotView.m */; };
+		30DCA7F81601ABA100198B5F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30DCA7F71601ABA100198B5F /* UIKit.framework */; };
+		30DCA7FA1601ABA100198B5F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30DCA7F91601ABA100198B5F /* Foundation.framework */; };
+		30DCA7FC1601ABA100198B5F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30DCA7FB1601ABA100198B5F /* CoreGraphics.framework */; };
+		30DCA8021601ABA100198B5F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 30DCA8001601ABA100198B5F /* InfoPlist.strings */; };
+		30DCA8041601ABA100198B5F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DCA8031601ABA100198B5F /* main.m */; };
+		30DCA8081601ABA100198B5F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DCA8071601ABA100198B5F /* AppDelegate.m */; };
+		30DCA8161601AC2000198B5F /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DCA8141601AC2000198B5F /* MainViewController.m */; };
+		30DCA8171601AC2000198B5F /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30DCA8151601AC2000198B5F /* MainViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		30015A7E1685F73200014433 /* GAInequality.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAInequality.h; path = "../InequalitiesSystem /GAInequality.h"; sourceTree = "<group>"; };
+		30015A7F1685F73200014433 /* GAInequality.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GAInequality.m; path = "../InequalitiesSystem /GAInequality.m"; sourceTree = "<group>"; };
+		3016C3151603BD2D00D1CBDB /* GeneticAlgorithmModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneticAlgorithmModel.h; sourceTree = "<group>"; };
+		3016C3161603BD2D00D1CBDB /* GeneticAlgorithmModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneticAlgorithmModel.m; sourceTree = "<group>"; };
+		301B16CC1601C03E002D43CB /* CustomTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewController.h; sourceTree = "<group>"; };
+		301B16CD1601C03E002D43CB /* CustomTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewController.m; sourceTree = "<group>"; };
+		301B16CE1601C03E002D43CB /* CustomTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTableViewController.xib; sourceTree = "<group>"; };
+		306708A616830302003C5E57 /* GeneticAlgorithmModelNew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneticAlgorithmModelNew.h; sourceTree = "<group>"; };
+		306708A716830302003C5E57 /* GeneticAlgorithmModelNew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneticAlgorithmModelNew.m; sourceTree = "<group>"; };
+		306708AC1683083B003C5E57 /* GAInequalitiesSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAInequalitiesSystem.h; sourceTree = "<group>"; };
+		306708AD1683083B003C5E57 /* GAInequalitiesSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAInequalitiesSystem.m; sourceTree = "<group>"; };
+		3075383816061C6600AD053F /* GAIndivid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAIndivid.h; path = ../GAIndivid.h; sourceTree = "<group>"; };
+		3075383916061C6600AD053F /* GAIndivid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GAIndivid.m; path = ../GAIndivid.m; sourceTree = "<group>"; };
+		3090B7651682F05500CECC1F /* IndividCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndividCell.h; sourceTree = "<group>"; };
+		3090B7661682F05500CECC1F /* IndividCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndividCell.m; sourceTree = "<group>"; };
+		3090B7681682F0F100CECC1F /* IndividCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IndividCellView.xib; sourceTree = "<group>"; };
+		30DB489B162613A8002958EB /* PlotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlotView.h; sourceTree = "<group>"; };
+		30DB489C162613A8002958EB /* PlotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlotView.m; sourceTree = "<group>"; };
+		30DCA7F31601ABA100198B5F /* GeneticAlgorithm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeneticAlgorithm.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		30DCA7F71601ABA100198B5F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		30DCA7F91601ABA100198B5F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		30DCA7FB1601ABA100198B5F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		30DCA7FF1601ABA100198B5F /* GeneticAlgorithm-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GeneticAlgorithm-Info.plist"; sourceTree = "<group>"; };
+		30DCA8011601ABA100198B5F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		30DCA8031601ABA100198B5F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		30DCA8051601ABA100198B5F /* GeneticAlgorithm-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GeneticAlgorithm-Prefix.pch"; sourceTree = "<group>"; };
+		30DCA8061601ABA100198B5F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		30DCA8071601ABA100198B5F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		30DCA8131601AC2000198B5F /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		30DCA8141601AC2000198B5F /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		30DCA8151601AC2000198B5F /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		30DCA7F01601ABA100198B5F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				30DCA7F81601ABA100198B5F /* UIKit.framework in Frameworks */,
+				30DCA7FA1601ABA100198B5F /* Foundation.framework in Frameworks */,
+				30DCA7FC1601ABA100198B5F /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		30015A821685F7E300014433 /* Inequality */ = {
+			isa = PBXGroup;
+			children = (
+				30015A7E1685F73200014433 /* GAInequality.h */,
+				30015A7F1685F73200014433 /* GAInequality.m */,
+			);
+			path = Inequality;
+			sourceTree = "<group>";
+		};
+		306708AA16830812003C5E57 /* InequalitiesSystem  */ = {
+			isa = PBXGroup;
+			children = (
+				306708AC1683083B003C5E57 /* GAInequalitiesSystem.h */,
+				306708AD1683083B003C5E57 /* GAInequalitiesSystem.m */,
+			);
+			path = "InequalitiesSystem ";
+			sourceTree = "<group>";
+		};
+		306708AB1683081F003C5E57 /* Individ */ = {
+			isa = PBXGroup;
+			children = (
+				3075383816061C6600AD053F /* GAIndivid.h */,
+				3075383916061C6600AD053F /* GAIndivid.m */,
+			);
+			path = Individ;
+			sourceTree = "<group>";
+		};
+		3075383616061C2C00AD053F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				30015A821685F7E300014433 /* Inequality */,
+				306708AB1683081F003C5E57 /* Individ */,
+				306708AA16830812003C5E57 /* InequalitiesSystem  */,
+				306708A616830302003C5E57 /* GeneticAlgorithmModelNew.h */,
+				306708A716830302003C5E57 /* GeneticAlgorithmModelNew.m */,
+				3016C3151603BD2D00D1CBDB /* GeneticAlgorithmModel.h */,
+				3016C3161603BD2D00D1CBDB /* GeneticAlgorithmModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		3090B7611682EE6400CECC1F /* CellView */ = {
+			isa = PBXGroup;
+			children = (
+				3090B7651682F05500CECC1F /* IndividCell.h */,
+				3090B7661682F05500CECC1F /* IndividCell.m */,
+				3090B7681682F0F100CECC1F /* IndividCellView.xib */,
+			);
+			path = CellView;
+			sourceTree = "<group>";
+		};
+		30DB489916261397002958EB /* PlotDrawer */ = {
+			isa = PBXGroup;
+			children = (
+				30DB489B162613A8002958EB /* PlotView.h */,
+				30DB489C162613A8002958EB /* PlotView.m */,
+			);
+			path = PlotDrawer;
+			sourceTree = "<group>";
+		};
+		30DCA7E81601ABA100198B5F = {
+			isa = PBXGroup;
+			children = (
+				3090B7611682EE6400CECC1F /* CellView */,
+				30DB489916261397002958EB /* PlotDrawer */,
+				3075383616061C2C00AD053F /* Model */,
+				301B16CC1601C03E002D43CB /* CustomTableViewController.h */,
+				301B16CD1601C03E002D43CB /* CustomTableViewController.m */,
+				301B16CE1601C03E002D43CB /* CustomTableViewController.xib */,
+				30DCA8131601AC2000198B5F /* MainViewController.h */,
+				30DCA8141601AC2000198B5F /* MainViewController.m */,
+				30DCA8151601AC2000198B5F /* MainViewController.xib */,
+				30DCA7FD1601ABA100198B5F /* GeneticAlgorithm */,
+				30DCA7F61601ABA100198B5F /* Frameworks */,
+				30DCA7F41601ABA100198B5F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		30DCA7F41601ABA100198B5F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				30DCA7F31601ABA100198B5F /* GeneticAlgorithm.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		30DCA7F61601ABA100198B5F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				30DCA7F71601ABA100198B5F /* UIKit.framework */,
+				30DCA7F91601ABA100198B5F /* Foundation.framework */,
+				30DCA7FB1601ABA100198B5F /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		30DCA7FD1601ABA100198B5F /* GeneticAlgorithm */ = {
+			isa = PBXGroup;
+			children = (
+				30DCA8061601ABA100198B5F /* AppDelegate.h */,
+				30DCA8071601ABA100198B5F /* AppDelegate.m */,
+				30DCA7FE1601ABA100198B5F /* Supporting Files */,
+			);
+			path = GeneticAlgorithm;
+			sourceTree = "<group>";
+		};
+		30DCA7FE1601ABA100198B5F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				30DCA7FF1601ABA100198B5F /* GeneticAlgorithm-Info.plist */,
+				30DCA8001601ABA100198B5F /* InfoPlist.strings */,
+				30DCA8031601ABA100198B5F /* main.m */,
+				30DCA8051601ABA100198B5F /* GeneticAlgorithm-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		30DCA7F21601ABA100198B5F /* GeneticAlgorithm */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 30DCA80B1601ABA100198B5F /* Build configuration list for PBXNativeTarget "GeneticAlgorithm" */;
+			buildPhases = (
+				30DCA7EF1601ABA100198B5F /* Sources */,
+				30DCA7F01601ABA100198B5F /* Frameworks */,
+				30DCA7F11601ABA100198B5F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GeneticAlgorithm;
+			productName = GeneticAlgorithm;
+			productReference = 30DCA7F31601ABA100198B5F /* GeneticAlgorithm.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		30DCA7EA1601ABA100198B5F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0440;
+				ORGANIZATIONNAME = oxy;
+			};
+			buildConfigurationList = 30DCA7ED1601ABA100198B5F /* Build configuration list for PBXProject "GeneticAlgorithm" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 30DCA7E81601ABA100198B5F;
+			productRefGroup = 30DCA7F41601ABA100198B5F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				30DCA7F21601ABA100198B5F /* GeneticAlgorithm */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		30DCA7F11601ABA100198B5F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				30DCA8021601ABA100198B5F /* InfoPlist.strings in Resources */,
+				30DCA8171601AC2000198B5F /* MainViewController.xib in Resources */,
+				301B16D01601C03E002D43CB /* CustomTableViewController.xib in Resources */,
+				3090B7691682F0F100CECC1F /* IndividCellView.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		30DCA7EF1601ABA100198B5F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				30DCA8041601ABA100198B5F /* main.m in Sources */,
+				30DCA8081601ABA100198B5F /* AppDelegate.m in Sources */,
+				30DCA8161601AC2000198B5F /* MainViewController.m in Sources */,
+				301B16CF1601C03E002D43CB /* CustomTableViewController.m in Sources */,
+				3016C3171603BD2D00D1CBDB /* GeneticAlgorithmModel.m in Sources */,
+				3075383A16061C6600AD053F /* GAIndivid.m in Sources */,
+				30DB489D162613A8002958EB /* PlotView.m in Sources */,
+				3090B7671682F05500CECC1F /* IndividCell.m in Sources */,
+				306708A816830302003C5E57 /* GeneticAlgorithmModelNew.m in Sources */,
+				306708AE1683083B003C5E57 /* GAInequalitiesSystem.m in Sources */,
+				30015A801685F73200014433 /* GAInequality.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		30DCA8001601ABA100198B5F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				30DCA8011601ABA100198B5F /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		30DCA8091601ABA100198B5F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		30DCA80A1601ABA100198B5F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		30DCA80C1601ABA100198B5F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GeneticAlgorithm/GeneticAlgorithm-Prefix.pch";
+				INFOPLIST_FILE = "GeneticAlgorithm/GeneticAlgorithm-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		30DCA80D1601ABA100198B5F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GeneticAlgorithm/GeneticAlgorithm-Prefix.pch";
+				INFOPLIST_FILE = "GeneticAlgorithm/GeneticAlgorithm-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		30DCA7ED1601ABA100198B5F /* Build configuration list for PBXProject "GeneticAlgorithm" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				30DCA8091601ABA100198B5F /* Debug */,
+				30DCA80A1601ABA100198B5F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		30DCA80B1601ABA100198B5F /* Build configuration list for PBXNativeTarget "GeneticAlgorithm" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				30DCA80C1601ABA100198B5F /* Debug */,
+				30DCA80D1601ABA100198B5F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 30DCA7EA1601ABA100198B5F /* Project object */;
+}
