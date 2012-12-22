@@ -27,10 +27,7 @@
         
         _leftBorderX = 0;
         _rightBorderX = 20;
-    }
-    
-    [self generateFirstPopulation];
-    self.firstPopulation = self.currentPopulation;
+    }    
     return self;
 }
 
@@ -41,26 +38,21 @@
 - (void)generateFirstPopulation {
     NSMutableArray *population = [NSMutableArray array];
     
-    NSArray *binCode1;
-    NSArray *binCode2;
-    CGPoint pt;
     GAIndivid *anIndivid;
-    
     for(int i=0; i<30; i++) {
-        binCode1 = [self randBinIndivid];
-        binCode2 = [self randBinIndivid];
-        pt = CGPointMake([self valueOfIndivid:binCode1], [self valueOfIndivid:binCode2]);
-        anIndivid = [[GAIndivid alloc] initWithBinCodeX:binCode1 binCodeY:binCode2 fitness:pt];
         
+        do {
+            anIndivid = [self randIndividFromSet];
+        }while(![self.ineqSystem doesDotBelongToSystem: anIndivid.pt]);
         [population addObject:anIndivid];
     }
-    
     self.currentPopulation = population;
+    self.firstPopulation = self.currentPopulation;
 }
 
 
 #pragma mark -
-#pragma mark SubMethods
+#pragma mark Convertations
 
 - (NSArray *)randBinIndivid
 {
@@ -71,6 +63,33 @@
     }
     return anIndivid;
 }
+
+- (GAIndivid *)randIndividFromSet
+{
+    if(!self.packOfDotsFromSet || !self.packOfDotsFromSet.count) {
+        assert(YES); //pack of dots empty!
+        return nil;
+    }
+    
+    int r1 = arc4random()%self.packOfDotsFromSet.count;
+    NSArray *lineDots = [self.packOfDotsFromSet objectAtIndex:r1];
+    CGPoint somePt = ((NSValue *)[lineDots objectAtIndex:0]).CGPointValue;
+    double y = somePt.y;
+    
+    double fromX = somePt.x;
+    somePt = ((NSValue *)[lineDots objectAtIndex:lineDots.count-1]).CGPointValue;
+    double toX = somePt.x;
+    
+    //rand from diapason (fromX - toX)
+    double x = fromX + arc4random()%(int)toX;
+    
+    //make binaryRepresentation
+    NSArray *binX = [self individBinFromValue:x];
+    NSArray *binY = [self individBinFromValue:y];
+    
+    return [[GAIndivid alloc] initWithBinCodeX:binX binCodeY:binY fitness:CGPointMake(x, y)];
+}
+
 
 
 #pragma mark -
@@ -92,15 +111,43 @@
 - (float)valueOfIndivid:(NSArray *)anIndivid
 {
     int A = [self numberFromBinary:anIndivid];
-    
-    float v = pow(2, self.binaryCodeLength);
-    
-    float div = (A/v);
-    
-    float res = (div * (self.rightBorderX - self.leftBorderX)) + self.leftBorderX;
-    
-    return res;
+    return ((A/pow(2, self.binaryCodeLength)) * (self.rightBorderX - self.leftBorderX)) + self.leftBorderX;
 }
+
+// int -> bin (converts number in INTeger to BINary)
+- (NSArray *)binaryFromNumber:(int)number {
+    
+    int max = pow(2, self.binaryCodeLength) -1;
+    NSLog(@"number = %d", number);
+    assert(number<max); //max allowed number exceeded
+    
+    NSMutableArray *result = [NSMutableArray array];
+    int diff=0;
+    int numbTemp = number;
+    
+    for (int i=self.binaryCodeLength-1; i>=0; i--) {
+        
+        diff = numbTemp-pow(2, i);
+        if(diff>=0) {
+            numbTemp -= pow(2, i);
+            [result addObject: [NSNumber numberWithInt:1]];
+        }
+        else {
+            [result addObject: [NSNumber numberWithInt:0]];
+        }
+    }
+    return result;
+}
+
+//individ value  ->  individ binary code 
+- (NSArray *)individBinFromValue:(CGFloat)value
+{
+    int B = ((value - self.leftBorderX)/(self.rightBorderX - self.leftBorderX)) * pow(2, self.binaryCodeLength);
+    
+    NSArray *arr = [self binaryFromNumber:B];
+    return arr;
+}
+
 
 @end
 

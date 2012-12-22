@@ -31,8 +31,8 @@
 {
     CustomTableViewController *_tableViewControl;
     
-    //GeneticAlgorithmModel *_genAlrorithm;
     GeneticAlgorithmModelNew *_genAlrorithmNew;
+    GAInequalitiesSystem *_syst;
     
     PlotView *_plot;
     BOOL _isRedrawingNow;
@@ -67,11 +67,6 @@
     self.rightBorderLabel.delegate = self;
     self.rightBorderLabel.tag = RIGHT_BORDER_FIELD;
     
-    _genAlrorithmNew = [GeneticAlgorithmModelNew new];
-    _genAlrorithmNew.leftBorderX = 0;
-    _genAlrorithmNew.rightBorderX = 20;
-    [_tableViewControl.sections addObject:_genAlrorithmNew.firstPopulation];
-    [_tableViewControl reloadTableView];
     
     
     // PLOT
@@ -79,15 +74,15 @@
     _plot.leftBorder = 0;
     _plot.rightBorder = 20;
     
-    GAInequalitiesSystem *syst = [GAInequalitiesSystem new];
+    _syst = [GAInequalitiesSystem new];
     GAInequality *en1 = [[GAInequality alloc] initWithA:-1 B:3 C:6];
     GAInequality *en2 = [[GAInequality alloc] initWithA:-3 B:2 C:-3];
     GAInequality *en3 = [[GAInequality alloc] initWithA:6 B:2 C:42];
-    [syst addInequaly:en1];
-    [syst addInequaly:en2];
-    [syst addInequaly:en3];
-    
-    _plot.ineqSystem = syst;
+    [_syst addInequaly:en1];
+    [_syst addInequaly:en2];
+    [_syst addInequaly:en3];
+
+    _plot.ineqSystem = _syst;
     
     [self.placeForPlot removeFromSuperview];
     [self.view addSubview:_plot];
@@ -99,6 +94,21 @@
     [doubleTap setDelaysTouchesBegan: YES];
     [doubleTap setNumberOfTapsRequired: 2];
     [_plot addGestureRecognizer: doubleTap];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    _genAlrorithmNew = [GeneticAlgorithmModelNew new];
+    _genAlrorithmNew.leftBorderX = 0;
+    _genAlrorithmNew.rightBorderX = 20;
+    _genAlrorithmNew.ineqSystem = _syst;
+    _genAlrorithmNew.packOfDotsFromSet = [_plot takePackOfDotsFromSet];
+    [_genAlrorithmNew generateFirstPopulation];
+    
+    [_tableViewControl.sections addObject:_genAlrorithmNew.firstPopulation];
+    [_tableViewControl reloadTableView];
+
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -265,6 +275,19 @@
         NSLog(@"called2");
     });
 }
+
+- (NSString *)arrayToString:(NSArray *)anArray
+{
+    NSMutableString *result = [NSMutableString string];
+    for(int i=0; i<anArray.count; i++) {
+        [result appendString: ((NSNumber *)[anArray objectAtIndex:i]).stringValue];
+        if(i == 2 || i == 5 || i == 8) {
+            [result appendString:@" "];
+        }
+    }
+    return result;
+}
+
 
 
 #pragma mark -

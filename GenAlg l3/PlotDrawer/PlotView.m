@@ -13,6 +13,7 @@
     UIImageView *_canvas;
     NSMutableArray *_chartPointsPack; //Array of Arrays(with CGPoints packed to NSValue)
     NSMutableArray *_dropLinesPack; //Array of Arrays(with CGPoints packed to NSValue)
+    NSMutableArray *_dropLinesPackOriginal; //Array of Arrays(with CGPoints packed to NSValue)
 }
 @end
 
@@ -42,6 +43,10 @@
         self.needDrawSubLines = YES;
         _chartPointsPack = [NSMutableArray new];
         _dropLinesPack = [NSMutableArray new];
+        _dropLinesPackOriginal = [NSMutableArray new];
+        [self buildChartDots];
+        [self buildDropLines];
+
     }
     return self;
 }
@@ -65,6 +70,10 @@
     [self drawDropPack];
     [self drawChartPack];
 
+}
+
+- (NSArray *)takePackOfDotsFromSet {
+    return _dropLinesPackOriginal;
 }
 
 
@@ -245,6 +254,7 @@
 - (void)buildDropLines {
     
     NSMutableArray *linePoints;
+    NSMutableArray *linePointsOriginal;
     
     double h = 0.1;
     CGPoint dot;
@@ -252,16 +262,21 @@
     for(double i=20; i>0; i-=0.3) {
         
         linePoints = [NSMutableArray new];
+        linePointsOriginal = [NSMutableArray new];
         for(double j=0; j<20; j+=h) {
             
             dot = CGPointMake(j, i);
             if([self.ineqSystem doesDotBelongToSystem:dot]) {
+                
+                [linePointsOriginal addObject:[NSValue valueWithCGPoint:dot]];
+                
                 dot = [self interpritateFuncToScreenX:dot.x y:-dot.y];
                 [linePoints addObject:[NSValue valueWithCGPoint:dot]];
             }
         }
         if(linePoints.count!=0) {
             [_dropLinesPack addObject:linePoints];
+            [_dropLinesPackOriginal addObject:linePointsOriginal];
         }
     }
 }

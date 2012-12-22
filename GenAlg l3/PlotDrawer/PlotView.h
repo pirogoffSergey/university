@@ -24,36 +24,12 @@
 @property (nonatomic, assign) float rightBorder;
 @property (nonatomic, assign) BOOL needDrawSubLines;
 
-//@property (nonatomic, weak) id<PlotViewProtocol> mathDelegate;
-
 @property (nonatomic, strong) GAInequalitiesSystem *ineqSystem;
 
 
 - (id)initWithFrame:(CGRect)frame;
 - (void)redraw;
 
+- (NSArray *)takePackOfDotsFromSet;
+
 @end
-
-
-/*
-  HOW TO USE
- 
- 
- _plotView = [[PlotView alloc] initWithFrame:self.someView.frame];
- 
- _plotView.mathDelegate = self;
- 
- _plotView.leftBorder = -4;
- _plotView.rightBorder = 4;
- 
- [self.someView removeFromSuperview];
- [self.view addSubview:_plotView];
-
- 
- // implementation of <PlotViewProtocol>
-    - (float)f:(CGFloat)x
-    {
-        return (2 + x*x + 2*x*x*x + x*x*x*x);
-    }
- 
- */

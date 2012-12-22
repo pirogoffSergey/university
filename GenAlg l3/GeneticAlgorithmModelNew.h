@@ -26,4 +26,8 @@
 
 @property (nonatomic, strong) NSArray *firstPopulation; // array of GAIndivids
 
+@property (nonatomic, strong) NSArray *packOfDotsFromSet; //Array of Arrays(with CGPoints packed to NSValue)
+
+- (void)generateFirstPopulation;
+
 @end
