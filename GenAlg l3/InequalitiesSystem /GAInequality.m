@@ -91,4 +91,8 @@
     return self.comparator(leftPart,self.c);
 }
 
+- (CGFloat)asFunction:(CGFloat)x {
+    return (_c-_a*x)/_b;
+}
+
 @end

@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+#import "GAInequalitiesSystem.h"
+
+
 @protocol PlotViewProtocol <NSObject>
 
 - (CGFloat)f:(CGFloat)x;
@@ -21,7 +24,10 @@
 @property (nonatomic, assign) float rightBorder;
 @property (nonatomic, assign) BOOL needDrawSubLines;
 
-@property (nonatomic, weak) id<PlotViewProtocol> mathDelegate;
+//@property (nonatomic, weak) id<PlotViewProtocol> mathDelegate;
+
+@property (nonatomic, strong) GAInequalitiesSystem *ineqSystem;
+
 
 - (id)initWithFrame:(CGRect)frame;
 - (void)redraw;

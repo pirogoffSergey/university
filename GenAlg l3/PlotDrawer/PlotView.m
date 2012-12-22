@@ -11,7 +11,13 @@
 @interface PlotView ()
 {
     UIImageView *_canvas;
+    NSMutableArray *_chartPointsPack; //Array of Arrays(with CGPoints)
+    
+    NSMutableArray *_dropLinesPack;
 }
+
+
+
 @end
 
 
@@ -38,6 +44,8 @@
         self.rightBorder = 20;
         
         self.needDrawSubLines = YES;
+        _chartPointsPack = [NSMutableArray new];
+        _dropLinesPack = [NSMutableArray new];
     }
     return self;
 }
@@ -48,18 +56,6 @@
     _canvas = [[UIImageView alloc] initWithFrame: CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
     [self addSubview:_canvas];
     [self redraw];
-}
-
-
-- (float)f:(float)x
-{
-    if ([self.mathDelegate respondsToSelector:@selector(f:)]) {
-        return [self.mathDelegate f:x];
-    }
-    
-    //return 2.0*x;
-    //return cosf(x);
-    return powf(x-10, 2);
 }
 
 
@@ -176,9 +172,9 @@
 
 
 #pragma mark -
-#pragma mark Draw Chart
+#pragma mark Draw Chart (Inequalities  Mode)
 
-- (void)drawChart
+/*- (void)drawChart
 {
     assert((_rightBorder-_leftBorder) > 0);
     
@@ -205,6 +201,80 @@
         
         [_canvas setImage:[self lineFrom:p1 to:p2 image:_canvas.image withColor:[UIColor redColor]]];
     }
+} */
+
+- (void)drawChart
+{
+    assert((_rightBorder-_leftBorder) > 0);
+    
+    float step = 0.01;
+    
+    
+    float y1 = 0;
+    float y2 = 0;
+    
+    CGPoint p1;
+    CGPoint p2;
+    
+    NSArray *inequalities = [self.ineqSystem allInequalities];
+    for(GAInequality *ineq in inequalities) {
+        
+        NSMutableArray *oneLineDots = [NSMutableArray array];
+        for(float h=_leftBorder; h<_rightBorder-step; h+=step) {
+            
+            y1 = [ineq asFunction:h];
+            y2 = [ineq asFunction:h+step];
+            
+            p1 = [self interpritateFuncToScreenX:h y:-y1]; //invert Y cause we transform (0,0)to (160,240)
+            p2 = [self interpritateFuncToScreenX:h y:-y2];
+            
+            if((p1.y < 0 || p2.y < 0) || (p1.y > _canvas.frame.size.height || p2.y > _canvas.frame.size.height)) {
+                continue;
+            }
+            
+            //[_canvas setImage:[self lineFrom:p1 to:p2 image:_canvas.image withColor:[UIColor redColor]]];
+            [oneLineDots addObject:[NSValue valueWithCGPoint:p1]];
+            [oneLineDots addObject:[NSValue valueWithCGPoint:p2]];
+        }
+        [_chartPointsPack addObject:oneLineDots];
+    }
+    
+    [self drawChartPack];
+}
+
+- (void)drawChartPack {
+    
+    UIImage *image = _canvas.image;
+
+    CGSize screenSize = self.frame.size;
+    UIGraphicsBeginImageContext(screenSize);
+    CGContextRef currentContext = UIGraphicsGetCurrentContext();
+    [image drawInRect:CGRectMake(0, 0, screenSize.width, screenSize.height)];
+    
+    CGContextSetLineCap(currentContext, kCGLineCapRound);
+    CGContextSetLineWidth(currentContext, 1);
+    CGContextSetRGBStrokeColor(currentContext, 1, 1, 0, 1);
+    CGContextBeginPath(currentContext);
+    
+    CGPoint pt1;
+    CGPoint pt2;
+    for(NSArray *chartPoints in _chartPointsPack) {
+        
+        for (int i=0; i<chartPoints.count-1; i++) {
+            pt1 = ((NSValue *)[chartPoints objectAtIndex:i]).CGPointValue;
+            pt2 = ((NSValue *)[chartPoints objectAtIndex:i+1]).CGPointValue;
+            
+            CGContextMoveToPoint(currentContext, pt1.x, pt1.y);
+            CGContextAddLineToPoint(currentContext, pt2.x, pt2.y);
+        }
+    }
+    
+    CGContextStrokePath(currentContext);
+    
+    UIImage *ret = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    [_canvas setImage:ret];
+    //return ret;
 }
 
 

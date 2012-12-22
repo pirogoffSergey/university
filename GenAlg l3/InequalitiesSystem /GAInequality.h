@@ -29,4 +29,6 @@ typedef enum {
 - (id)initWithA:(CGFloat)a B:(CGFloat)b C:(CGFloat)c;
 - (BOOL)doesDotBelongToInequality:(CGPoint)dot;
 
+- (CGFloat)asFunction:(CGFloat)x;
+
 @end

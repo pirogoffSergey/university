@@ -11,6 +11,8 @@
 #import "GeneticAlgorithmModel.h"
 
 #import "PlotView.h"
+#import "GAInequalitiesSystem.h"
+#import "GAInequality.h"
 
 
 #define A0_PARAM_FIELD 1
@@ -79,10 +81,20 @@
     
     // PLOT
     _plot = [[PlotView alloc] initWithFrame:self.placeForPlot.frame];
-    _plot.mathDelegate = _genAlrorithm;
+//    _plot.mathDelegate = _genAlrorithm;
 
     _plot.leftBorder = 0;
     _plot.rightBorder = 20;
+    
+    GAInequalitiesSystem *syst = [GAInequalitiesSystem new];
+    GAInequality *en1 = [[GAInequality alloc] initWithA:-1 B:3 C:6];
+    GAInequality *en2 = [[GAInequality alloc] initWithA:-3 B:2 C:-3];
+    GAInequality *en3 = [[GAInequality alloc] initWithA:6 B:2 C:42];
+    [syst addInequaly:en1];
+    [syst addInequaly:en2];
+    [syst addInequaly:en3];
+    
+    _plot.ineqSystem = syst;
     
     [self.placeForPlot removeFromSuperview];
     [self.view addSubview:_plot];
