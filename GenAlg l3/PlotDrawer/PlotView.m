@@ -22,8 +22,8 @@
 {
     self = [super init];
     if (self) {
-        self.leftBorder = -10;
-        self.rightBorder = 10;
+        self.leftBorder = 0;
+        self.rightBorder = 20;
         
         self.needDrawSubLines = YES;
     }
@@ -34,8 +34,8 @@
 {
     self = [super initWithFrame:frame];
     if(self) {
-        self.leftBorder = -10;
-        self.rightBorder = 10;
+        self.leftBorder = 0;
+        self.rightBorder = 20;
         
         self.needDrawSubLines = YES;
     }
@@ -59,7 +59,7 @@
     
     //return 2.0*x;
     //return cosf(x);
-    return x*x + x +1;
+    return powf(x-10, 2);
 }
 
 
@@ -78,29 +78,29 @@
 - (void)drawAxises
 {
     // X axis
-    [_canvas setImage:[self lineFrom:CGPointMake(0, _canvas.frame.size.height/2) to:CGPointMake(_canvas.frame.size.width, _canvas.frame.size.height/2) image:_canvas.image withColor:[UIColor blackColor]]];
+    [_canvas setImage:[self lineFrom:CGPointMake(0, _canvas.frame.size.height-10) to:CGPointMake(_canvas.frame.size.width, _canvas.frame.size.height-10) image:_canvas.image withColor:[UIColor blackColor]]];
     
     //make X arrow
-    [_canvas setImage:[self lineFrom:CGPointMake(_canvas.frame.size.width,_canvas.frame.size.height/2)
-                                  to:CGPointMake(_canvas.frame.size.width-10,(_canvas.frame.size.height/2)-5)
+    [_canvas setImage:[self lineFrom:CGPointMake(_canvas.frame.size.width,_canvas.frame.size.height-10)
+                                  to:CGPointMake(_canvas.frame.size.width-10,(_canvas.frame.size.height-10)-5)
                                image:_canvas.image
                            withColor:[UIColor blackColor]]];
-    [_canvas setImage:[self lineFrom:CGPointMake(_canvas.frame.size.width,_canvas.frame.size.height/2)
-                                  to:CGPointMake(_canvas.frame.size.width-10,(_canvas.frame.size.height/2)+5)
+    [_canvas setImage:[self lineFrom:CGPointMake(_canvas.frame.size.width,_canvas.frame.size.height-10)
+                                  to:CGPointMake(_canvas.frame.size.width-10,(_canvas.frame.size.height-10)+5)
                                image:_canvas.image
                            withColor:[UIColor blackColor]]];
     
     if([self isNeedDrawYaxis]) {
         // Y axis
-        [_canvas setImage:[self lineFrom:CGPointMake(_canvas.frame.size.width/2, 0) to:CGPointMake(_canvas.frame.size.width/2, _canvas.frame.size.height) image:_canvas.image withColor:[UIColor blackColor]]];
+        [_canvas setImage:[self lineFrom:CGPointMake(10, 0) to:CGPointMake(10, _canvas.frame.size.height) image:_canvas.image withColor:[UIColor blackColor]]];
         
         //make Y arrow
-        [_canvas setImage:[self lineFrom:CGPointMake(_canvas.frame.size.width/2, 0)
-                                      to:CGPointMake(_canvas.frame.size.width/2-5, 10)
+        [_canvas setImage:[self lineFrom:CGPointMake(10, 0)
+                                      to:CGPointMake(10-5, 10)
                                    image:_canvas.image
                                withColor:[UIColor blackColor]]];
-        [_canvas setImage:[self lineFrom:CGPointMake(_canvas.frame.size.width/2, 0)
-                                      to:CGPointMake(_canvas.frame.size.width/2+5, 10)
+        [_canvas setImage:[self lineFrom:CGPointMake(10, 0)
+                                      to:CGPointMake(10+5, 10)
                                    image:_canvas.image
                                withColor:[UIColor blackColor]]];
     }
@@ -113,7 +113,7 @@
     for(float x=_leftBorder; x<_rightBorder; x++) {
         
         xPoint = [self interpritateFuncToScreenX:x y:0];
-        yPoint = [self interpritateFuncToScreenX:0 y:x];
+        yPoint = [self interpritateFuncToScreenX:0 y:-x];
         [self drawVerticalRisochkaAtPoint:xPoint];
         [self drawHorizontalRisochkaAtPoint:yPoint];
         
@@ -215,7 +215,7 @@
 {
     float k = _canvas.frame.size.width/(_rightBorder - _leftBorder);
     
-    return CGPointMake(k*x+_canvas.frame.size.width/2, k*y+_canvas.frame.size.height/2);
+    return CGPointMake(k*x+10, k*y+(_canvas.frame.size.height-10));
 }
 
 /** Draws a line to an image and returns the resulting image */

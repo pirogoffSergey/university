@@ -81,8 +81,8 @@
     _plot = [[PlotView alloc] initWithFrame:self.placeForPlot.frame];
     _plot.mathDelegate = _genAlrorithm;
 
-    _plot.leftBorder = -4;
-    _plot.rightBorder = 4;
+    _plot.leftBorder = 0;
+    _plot.rightBorder = 20;
     
     [self.placeForPlot removeFromSuperview];
     [self.view addSubview:_plot];
