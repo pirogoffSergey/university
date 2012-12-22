@@ -80,7 +80,7 @@
         _a = a;
         _b = b;
         _c = c;
-        _signType = kLessOrEqual;
+        self.signType = kLessOrEqual;
     }
     return self;
 }

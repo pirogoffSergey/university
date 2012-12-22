@@ -11,13 +11,10 @@
 @interface PlotView ()
 {
     UIImageView *_canvas;
-    NSMutableArray *_chartPointsPack; //Array of Arrays(with CGPoints)
+    NSMutableArray *_chartPointsPack; //Array of Arrays(with CGPoints packed to NSValue)
     
-    NSMutableArray *_dropLinesPack;
+    NSMutableArray *_dropLinesPack; //Array of Arrays(with CGPoints packed to NSValue)
 }
-
-
-
 @end
 
 
@@ -174,42 +171,11 @@
 #pragma mark -
 #pragma mark Draw Chart (Inequalities  Mode)
 
-/*- (void)drawChart
-{
-    assert((_rightBorder-_leftBorder) > 0);
-    
-    float step = 0.01;
-    
-    
-    float y1 = 0;
-    float y2 = 0;
-    
-    CGPoint p1;
-    CGPoint p2;
-    
-    for(float h=_leftBorder; h<_rightBorder-step; h+=step) {
-        
-        y1 = [self f:h];
-        y2 = [self f:h+step];
-        
-        p1 = [self interpritateFuncToScreenX:h y:-y1]; //invert Y cause we transform (0,0)to (160,240)
-        p2 = [self interpritateFuncToScreenX:h y:-y2];
-        
-        if((p1.y < 0 || p2.y < 0) || (p1.y > _canvas.frame.size.height || p2.y > _canvas.frame.size.height)) {
-            continue;
-        }
-        
-        [_canvas setImage:[self lineFrom:p1 to:p2 image:_canvas.image withColor:[UIColor redColor]]];
-    }
-} */
-
 - (void)drawChart
 {
     assert((_rightBorder-_leftBorder) > 0);
-    
+        
     float step = 0.01;
-    
-    
     float y1 = 0;
     float y2 = 0;
     
@@ -239,6 +205,10 @@
         [_chartPointsPack addObject:oneLineDots];
     }
     
+    
+    [self buildDropLines];
+    [self drawDropPack];
+    
     [self drawChartPack];
 }
 
@@ -252,7 +222,7 @@
     [image drawInRect:CGRectMake(0, 0, screenSize.width, screenSize.height)];
     
     CGContextSetLineCap(currentContext, kCGLineCapRound);
-    CGContextSetLineWidth(currentContext, 1);
+    CGContextSetLineWidth(currentContext, 2);
     CGContextSetRGBStrokeColor(currentContext, 1, 1, 0, 1);
     CGContextBeginPath(currentContext);
     
@@ -274,8 +244,63 @@
     UIImage *ret = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     [_canvas setImage:ret];
-    //return ret;
 }
+
+- (void)buildDropLines {
+    
+    NSMutableArray *linePoints;
+    
+    double h = 0.1;
+    CGPoint dot;
+    
+    for(double i=20; i>0; i-=0.3) {
+        
+        linePoints = [NSMutableArray new];
+        for(double j=0; j<20; j+=h) {
+            
+            dot = CGPointMake(j, i);
+            if([self.ineqSystem doesDotBelongToSystem:dot]) {
+                dot = [self interpritateFuncToScreenX:dot.x y:-dot.y];
+                [linePoints addObject:[NSValue valueWithCGPoint:dot]];
+            }
+        }
+        if(linePoints.count!=0) {
+            [_dropLinesPack addObject:linePoints];
+        }
+    }
+}
+
+- (void)drawDropPack {
+    
+    UIImage *image = _canvas.image;
+    
+    CGSize screenSize = self.frame.size;
+    UIGraphicsBeginImageContext(screenSize);
+    CGContextRef currentContext = UIGraphicsGetCurrentContext();
+    [image drawInRect:CGRectMake(0, 0, screenSize.width, screenSize.height)];
+    
+    CGContextSetLineCap(currentContext, kCGLineCapRound);
+    CGContextSetLineWidth(currentContext, 1);
+    CGContextSetRGBStrokeColor(currentContext, 1, 0, 0, 1);
+    CGContextBeginPath(currentContext);
+    
+    CGPoint pt1;
+    CGPoint pt2;
+    for(NSArray *dropPoints in _dropLinesPack) {
+        
+        pt1 = ((NSValue *)[dropPoints objectAtIndex:0]).CGPointValue;
+        pt2 = ((NSValue *)[dropPoints objectAtIndex:dropPoints.count-1]).CGPointValue;        
+        CGContextMoveToPoint(currentContext, pt1.x, pt1.y);
+        CGContextAddLineToPoint(currentContext, pt2.x, pt2.y);
+    }
+    
+    CGContextStrokePath(currentContext);
+    
+    UIImage *ret = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    [_canvas setImage:ret];
+}
+
 
 
 #pragma mark -
