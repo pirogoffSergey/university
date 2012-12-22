@@ -12,7 +12,6 @@
 {
     UIImageView *_canvas;
     NSMutableArray *_chartPointsPack; //Array of Arrays(with CGPoints packed to NSValue)
-    
     NSMutableArray *_dropLinesPack; //Array of Arrays(with CGPoints packed to NSValue)
 }
 @end
@@ -61,7 +60,11 @@
     [_canvas setImage:[self imageWithSize:_canvas.frame.size color:[UIColor clearColor]]];
     
     [self drawAxises];
-    [self drawChart];
+    [self buildChartDots];
+    [self buildDropLines];
+    [self drawDropPack];
+    [self drawChartPack];
+
 }
 
 
@@ -171,7 +174,7 @@
 #pragma mark -
 #pragma mark Draw Chart (Inequalities  Mode)
 
-- (void)drawChart
+- (void)buildChartDots
 {
     assert((_rightBorder-_leftBorder) > 0);
         
@@ -198,18 +201,11 @@
                 continue;
             }
             
-            //[_canvas setImage:[self lineFrom:p1 to:p2 image:_canvas.image withColor:[UIColor redColor]]];
             [oneLineDots addObject:[NSValue valueWithCGPoint:p1]];
             [oneLineDots addObject:[NSValue valueWithCGPoint:p2]];
         }
         [_chartPointsPack addObject:oneLineDots];
-    }
-    
-    
-    [self buildDropLines];
-    [self drawDropPack];
-    
-    [self drawChartPack];
+    }    
 }
 
 - (void)drawChartPack {
