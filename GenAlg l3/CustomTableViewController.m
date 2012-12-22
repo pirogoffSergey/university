@@ -75,25 +75,25 @@
 
 - (void)selectCellsWithMaxElements {
     
-    GAIndivid *individ;
-    int indexMax = 0;
-    
-    NSMutableArray *lastSection = [NSMutableArray arrayWithArray:[self.sections objectAtIndex:self.sections.count-1]];
-
-    GAIndivid *maxIndivid = (GAIndivid *)[lastSection objectAtIndex:0];
-    
-    for(int i=0; i<lastSection.count; i++) {
-        individ =  (GAIndivid *)[lastSection objectAtIndex:i];
-        
-        if(individ.fitness.doubleValue > maxIndivid.fitness.doubleValue) {
-            individ = maxIndivid;
-            indexMax = i;
-        }
-    }
-        
-    //check
-    [self selectCellAtIndexPathAtIndexPath:[NSIndexPath indexPathForRow:indexMax inSection:self.sections.count-1]];
-    [self selectCellAtIndexPathAtIndexPath:[NSIndexPath indexPathForRow:indexMax inSection:self.sections.count-1]];
+//    GAIndivid *individ;
+//    int indexMax = 0;
+//    
+//    NSMutableArray *lastSection = [NSMutableArray arrayWithArray:[self.sections objectAtIndex:self.sections.count-1]];
+//
+//    GAIndivid *maxIndivid = (GAIndivid *)[lastSection objectAtIndex:0];
+//    
+//    for(int i=0; i<lastSection.count; i++) {
+//        individ =  (GAIndivid *)[lastSection objectAtIndex:i];
+//        
+//        if(individ.fitness.doubleValue > maxIndivid.fitness.doubleValue) {
+//            individ = maxIndivid;
+//            indexMax = i;
+//        }
+//    }
+//        
+//    //check
+//    [self selectCellAtIndexPathAtIndexPath:[NSIndexPath indexPathForRow:indexMax inSection:self.sections.count-1]];
+//    [self selectCellAtIndexPathAtIndexPath:[NSIndexPath indexPathForRow:indexMax inSection:self.sections.count-1]];
 }
 
 
@@ -147,7 +147,6 @@
     
     // Adaptation
     cell.xyLabel.text = [NSString stringWithFormat:@"(%@,%@)", [GeneticAlgorithmModel roundNumber:individ.pt.x], [GeneticAlgorithmModel roundNumber:individ.pt.y]];
-    cell.valueLabel.text = [GeneticAlgorithmModel roundNumber:individ.fitness.floatValue];
     return cell;
 }
 
@@ -157,6 +156,9 @@
     NSMutableString *result = [NSMutableString string];
     for(int i=0; i<anArray.count; i++) {
         [result appendString: ((NSNumber *)[anArray objectAtIndex:i]).stringValue];
+        if(i == 2 || i == 5 || i == 8) {
+            [result appendString:@" "];
+        }
     }
     return result;
 }

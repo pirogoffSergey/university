@@ -9,6 +9,7 @@
 #import "MainViewController.h"
 #import "CustomTableViewController.h"
 #import "GeneticAlgorithmModel.h"
+#import "GeneticAlgorithmModelNew.h"
 
 #import "PlotView.h"
 #import "GAInequalitiesSystem.h"
@@ -30,7 +31,8 @@
 {
     CustomTableViewController *_tableViewControl;
     
-    GeneticAlgorithmModel *_genAlrorithm;
+    //GeneticAlgorithmModel *_genAlrorithm;
+    GeneticAlgorithmModelNew *_genAlrorithmNew;
     
     PlotView *_plot;
     BOOL _isRedrawingNow;
@@ -41,15 +43,6 @@
 @implementation MainViewController
 
 @synthesize resultsTableView;
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
@@ -74,15 +67,15 @@
     self.rightBorderLabel.delegate = self;
     self.rightBorderLabel.tag = RIGHT_BORDER_FIELD;
     
-    _genAlrorithm = [GeneticAlgorithmModel new];
-    [_tableViewControl.sections addObject:_genAlrorithm.firstPopulation];
+    _genAlrorithmNew = [GeneticAlgorithmModelNew new];
+    _genAlrorithmNew.leftBorderX = 0;
+    _genAlrorithmNew.rightBorderX = 20;
+    [_tableViewControl.sections addObject:_genAlrorithmNew.firstPopulation];
     [_tableViewControl reloadTableView];
     
     
     // PLOT
     _plot = [[PlotView alloc] initWithFrame:self.placeForPlot.frame];
-//    _plot.mathDelegate = _genAlrorithm;
-
     _plot.leftBorder = 0;
     _plot.rightBorder = 20;
     
@@ -106,21 +99,6 @@
     [doubleTap setDelaysTouchesBegan: YES];
     [doubleTap setNumberOfTapsRequired: 2];
     [_plot addGestureRecognizer: doubleTap];
-}
-
-- (void)viewDidUnload
-{
-    [self setResultsTableView:nil];
-    [self setLeftBorderLabel:nil];
-    [self setRightBorderLabel:nil];
-    [self setA0ParamLabel:nil];
-    [self setA1ParamLabel:nil];
-    [self setA2ParamLabel:nil];
-    [self setA3ParamLabel:nil];
-    [self setA4ParamLabel:nil];
-    [self setPlaceForPlot:nil];
-    [self setActivIndicator:nil];
-    [super viewDidUnload];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -240,25 +218,25 @@
     _tableViewControl.sections = nil;
     _tableViewControl.sections = [NSMutableArray new];
     [_tableViewControl reloadTableView];
-    [_genAlrorithm regenerateFirstPopulation];
+//    [_genAlrorithm regenerateFirstPopulation];
 
-    [_tableViewControl.sections addObject:_genAlrorithm.firstPopulation];
+  //  [_tableViewControl.sections addObject:_genAlrorithm.firstPopulation];
     [_tableViewControl reloadTableView];
 }
 
 - (IBAction)calculateAction:(id)sender {
     
-    NSArray *result = [_genAlrorithm nextIteration];
-    [_tableViewControl.sections addObject:result];
-    [_tableViewControl reloadTableView];
+//    NSArray *result = [_genAlrorithm nextIteration];
+//    [_tableViewControl.sections addObject:result];
+//    [_tableViewControl reloadTableView];
 }
 
 - (IBAction)startAction:(id)sender {
     
     [_tableViewControl deselectAllCells];
     
-    _genAlrorithm.tableView = _tableViewControl;
-    [_genAlrorithm start];
+//    _genAlrorithm.tableView = _tableViewControl;
+//    [_genAlrorithm start];
     
     [_tableViewControl selectCellsWithMaxElements];
 }

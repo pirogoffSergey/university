@@ -10,13 +10,13 @@
 
 @implementation GAIndivid
 
-- (id)initWithBinCodeX:(NSArray *)binCode1 binCodeY:(NSArray *)binCode2 fitness:(NSNumber *)aFitness
+- (id)initWithBinCodeX:(NSArray *)binCode1 binCodeY:(NSArray *)binCode2 fitness:(CGPoint)pt
 {
     self = [super init];
     if(self) {
         self.binaryCodeX = binCode1;
         self.binaryCodeY = binCode2;
-        self.fitness = aFitness;
+        self.pt = pt;
     }
     return self;
 }

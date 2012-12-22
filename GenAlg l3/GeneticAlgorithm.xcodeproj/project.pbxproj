@@ -32,9 +32,9 @@
 		30015A7F1685F73200014433 /* GAInequality.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GAInequality.m; path = "../InequalitiesSystem /GAInequality.m"; sourceTree = "<group>"; };
 		3016C3151603BD2D00D1CBDB /* GeneticAlgorithmModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneticAlgorithmModel.h; sourceTree = "<group>"; };
 		3016C3161603BD2D00D1CBDB /* GeneticAlgorithmModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneticAlgorithmModel.m; sourceTree = "<group>"; };
-		301B16CC1601C03E002D43CB /* CustomTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewController.h; sourceTree = "<group>"; };
-		301B16CD1601C03E002D43CB /* CustomTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewController.m; sourceTree = "<group>"; };
-		301B16CE1601C03E002D43CB /* CustomTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTableViewController.xib; sourceTree = "<group>"; };
+		301B16CC1601C03E002D43CB /* CustomTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewController.h; sourceTree = SOURCE_ROOT; };
+		301B16CD1601C03E002D43CB /* CustomTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewController.m; sourceTree = SOURCE_ROOT; };
+		301B16CE1601C03E002D43CB /* CustomTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTableViewController.xib; sourceTree = SOURCE_ROOT; };
 		306708A616830302003C5E57 /* GeneticAlgorithmModelNew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneticAlgorithmModelNew.h; sourceTree = "<group>"; };
 		306708A716830302003C5E57 /* GeneticAlgorithmModelNew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneticAlgorithmModelNew.m; sourceTree = "<group>"; };
 		306708AC1683083B003C5E57 /* GAInequalitiesSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAInequalitiesSystem.h; sourceTree = "<group>"; };
@@ -138,12 +138,10 @@
 		30DCA7E81601ABA100198B5F = {
 			isa = PBXGroup;
 			children = (
+				30E542FC16862D470031D480 /* CustomTableView */,
 				3090B7611682EE6400CECC1F /* CellView */,
 				30DB489916261397002958EB /* PlotDrawer */,
 				3075383616061C2C00AD053F /* Model */,
-				301B16CC1601C03E002D43CB /* CustomTableViewController.h */,
-				301B16CD1601C03E002D43CB /* CustomTableViewController.m */,
-				301B16CE1601C03E002D43CB /* CustomTableViewController.xib */,
 				30DCA8131601AC2000198B5F /* MainViewController.h */,
 				30DCA8141601AC2000198B5F /* MainViewController.m */,
 				30DCA8151601AC2000198B5F /* MainViewController.xib */,
@@ -190,6 +188,16 @@
 				30DCA8051601ABA100198B5F /* GeneticAlgorithm-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		30E542FC16862D470031D480 /* CustomTableView */ = {
+			isa = PBXGroup;
+			children = (
+				301B16CC1601C03E002D43CB /* CustomTableViewController.h */,
+				301B16CD1601C03E002D43CB /* CustomTableViewController.m */,
+				301B16CE1601C03E002D43CB /* CustomTableViewController.xib */,
+			);
+			path = CustomTableView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

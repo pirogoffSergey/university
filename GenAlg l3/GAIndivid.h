@@ -14,9 +14,7 @@
 @property (nonatomic, strong) NSArray *binaryCodeY;
 
 @property (nonatomic, assign) CGPoint pt; //(x,y)
-@property (nonatomic, strong) NSNumber *fitness;    //f(x,y)
 
-
-- (id)initWithBinCodeX:(NSArray *)binCode1 binCodeY:(NSArray *)binCode2 fitness:(NSNumber *)aFitness;
+- (id)initWithBinCodeX:(NSArray *)binCode1 binCodeY:(NSArray *)binCode2 fitness:(CGPoint)pt;
 
 @end

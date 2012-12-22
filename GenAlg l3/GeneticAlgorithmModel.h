@@ -12,10 +12,9 @@
 
 #import "CustomTableViewController.h"
 
+
+
 @interface GeneticAlgorithmModel : NSObject <PlotViewProtocol>
-
-//function is: ax^2 + bx + c
-
 
 @property (nonatomic, strong) CustomTableViewController *tableView;
 

@@ -11,19 +11,19 @@
 #import "PlotView.h"
 
 #import "CustomTableViewController.h"
-
+#import "GAInequalitiesSystem.h"
 
 
 @interface GeneticAlgorithmModelNew : NSObject
 
 @property (nonatomic, strong) CustomTableViewController *tableView;
+@property (nonatomic, strong) GAInequalitiesSystem *ineqSystem;
 
 @property (nonatomic, assign) int leftBorderX;
 @property (nonatomic, assign) int rightBorderX;
-@property (nonatomic, assign) int topBorderY;
-@property (nonatomic, assign) int bottomBorderY;
-
 @property (nonatomic, assign) int binaryCodeLength;
 @property (nonatomic, assign) float mutationChance;
+
+@property (nonatomic, strong) NSArray *firstPopulation; // array of GAIndivids
 
 @end

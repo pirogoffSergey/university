@@ -14,6 +14,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *binCode2Label;
 
 @property (weak, nonatomic) IBOutlet UILabel *xyLabel;
-@property (weak, nonatomic) IBOutlet UILabel *valueLabel;
+//@property (weak, nonatomic) IBOutlet UILabel *valueLabel;
 
 @end
