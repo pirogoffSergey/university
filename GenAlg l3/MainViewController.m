@@ -245,6 +245,8 @@
     
     [_tableViewControl deselectAllCells];
     
+    [_genAlrorithmNew calculate];
+    
 //    _genAlrorithm.tableView = _tableViewControl;
 //    [_genAlrorithm start];
     

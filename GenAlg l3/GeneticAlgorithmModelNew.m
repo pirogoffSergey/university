@@ -85,6 +85,32 @@
     self.ranks = ranksNew;
 }
 
+- (void)calculateAverageFitness {
+    
+    NSMutableArray *averageFitnesses = [NSMutableArray array];
+    int curRank = 0;
+    double Fi=0;
+    
+    for (int i=0; i<self.currentPopulation.count; i++) {
+        
+        curRank = ((NSNumber *)[self.ranks objectAtIndex:i]).intValue;
+        if(curRank > 1) {
+            
+            double sum = 0;
+            for(int k=0; k<curRank-1; k++) {
+                sum += [self individsCountWithRank:k];
+            }
+            Fi = self.currentPopulation.count - sum - 0.5*([self individsCountWithRank:curRank] - 1);
+        }
+        else {
+            Fi = self.currentPopulation.count - 0.5*([self individsCountWithRank:1] - 1);
+        }
+        [averageFitnesses addObject: [NSNumber numberWithDouble:Fi]];
+    }
+}
+
+
+
 
 #pragma mark -
 #pragma mark SubMethods
@@ -97,6 +123,17 @@
         }
     }
     return NO;
+}
+
+- (int)individsCountWithRank:(int)rank {
+    
+    int count=0;
+    for(NSNumber *r in self.ranks) {
+        if(r.intValue == rank) {
+            count++;
+        }
+    }
+    return count;
 }
 
 
