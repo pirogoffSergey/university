@@ -109,7 +109,6 @@
     [_tableViewControl reloadTableView];
     
     [self drawDotsPopulation];
-
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -161,6 +160,9 @@
     
     NSArray *paretoDots = [_genAlrorithmNew calculate];
     [self drawParetoDots:paretoDots];
+    
+    [_tableViewControl.sections addObject:paretoDots];
+    [_tableViewControl reloadTableView];
 }
 
 - (IBAction)addIneq:(id)sender {

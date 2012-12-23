@@ -76,17 +76,17 @@
     NSMutableArray *newParetoElems = [NSMutableArray array];
     
     for(GAIndivid *ind in paretoElems) {
-        NSLog(@"pt: %@",[NSValue valueWithCGPoint:ind.pt]);
+//        NSLog(@"pt: %@",[NSValue valueWithCGPoint:ind.pt]);
         optimized = [self optimizeIndivid:ind];
         for(GAIndivid *optInd in optimized) {
             [newParetoElems addObject:optInd];
         }
     }
     
-    NSLog(@"------------");
-    for(GAIndivid *ind in newParetoElems) {
-        NSLog(@"new pt: %@",[NSValue valueWithCGPoint:ind.pt]);
-    }
+//    NSLog(@"------------");
+//    for(GAIndivid *ind in newParetoElems) {
+//        NSLog(@"new pt: %@",[NSValue valueWithCGPoint:ind.pt]);
+//    }
     return newParetoElems;
 }
 

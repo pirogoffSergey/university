@@ -128,6 +128,9 @@
     if(section == 0) {
         return @"Initial population";
     }
+    if(section == 1) {
+        return @"Pareto dots";
+    }
     return [NSString stringWithFormat:@"Step %d", section];
 }
 
