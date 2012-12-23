@@ -25,7 +25,7 @@
 @property (nonatomic, assign) float mutationChance;
 
 @property (nonatomic, strong) NSArray *firstPopulation; // array of GAIndivids
-@property (nonatomic, strong) NSArray *ranksOfPopulation; // array of NSNumbers
+//@property (nonatomic, strong) NSArray *ranksOfPopulation; // array of NSNumbers
 
 @property (nonatomic, strong) NSArray *packOfDotsFromSet; //Array of Arrays(with CGPoints packed to NSValue)
 

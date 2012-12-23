@@ -51,13 +51,23 @@
     }
     self.currentPopulation = population;
     self.firstPopulation = self.currentPopulation;
+    
+    self.ranks = [self ranksByGoldenbergForPopulation:_currentPopulation];
+    GAIndivid *individ;
+    for(int i=0; i<self.ranks.count; i++) {
+        individ = [self.currentPopulation objectAtIndex:i];
+        individ.rank = ((NSNumber *)[self.ranks objectAtIndex:i]).intValue;
+    }
+    
+    NSArray *paretoElems = [self findNonDomanativeIndividsFromPopulation:_currentPopulation];
+    for(GAIndivid *ind in paretoElems) {
+        NSLog(@"pt: %@",[NSValue valueWithCGPoint:ind.pt]);
+    }
 }
 
 - (void)regenerateFirstPopulation
 {
     [self generateFirstPopulation];
-    self.ranks = [self ranksByGoldenbergForPopulation:_currentPopulation];
-    self.ranksOfPopulation = self.ranks;
 }
 
 - (void)calculate {
@@ -72,6 +82,34 @@
 
 #pragma mark -
 #pragma mark MainMethods
+
+- (NSArray *)findNonDomanativeIndividsFromPopulation:(NSArray *)population {
+    
+  //  int rank=1;
+    NSMutableArray *nonDomanativeIndivids = [NSMutableArray array];
+    BOOL worseFlag = NO;
+    
+    for(GAIndivid *ind in population) {
+        
+        for(GAIndivid *ind2 in population) {
+            if(ind!=ind2) {
+                if([self isIndivid:ind2 dominateIndivid:ind]) {
+                    //ind is worse
+                    worseFlag = YES;
+                    break;
+                }
+            }
+        }
+        if(worseFlag == NO) {
+            [nonDomanativeIndivids addObject:ind];
+        }
+        else {
+            worseFlag = NO;
+        }
+    }
+    
+    return nonDomanativeIndivids;
+}
 
 - (void)chooseNonComparatableIndivids {
     

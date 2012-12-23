@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GeneticAlgorithmModelNew.m"
-         timestampString = "377969692.964747"
+         timestampString = "377973673.442677"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "104"
-         endingLineNumber = "104"
+         startingLineNumber = "144"
+         endingLineNumber = "144"
          landmarkName = "-chooseNonComparatableIndivids"
          landmarkType = "5">
       </FileBreakpoint>
@@ -21,11 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "GeneticAlgorithmModelNew.m"
-         timestampString = "377969692.964747"
+         timestampString = "377973673.442677"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "132"
-         endingLineNumber = "132"
+         startingLineNumber = "172"
+         endingLineNumber = "172"
          landmarkName = "-ranksByGoldenbergForPopulation:"
          landmarkType = "5">
       </FileBreakpoint>

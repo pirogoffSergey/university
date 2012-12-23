@@ -147,6 +147,9 @@
     
     // Adaptation
     cell.xyLabel.text = [NSString stringWithFormat:@"(%@,%@)", [GeneticAlgorithmModel roundNumber:individ.pt.x], [GeneticAlgorithmModel roundNumber:individ.pt.y]];
+    
+    // Rank
+    cell.rankLabel.text = [NSString stringWithFormat:@"rank = %d",individ.rank];
     return cell;
 }
 

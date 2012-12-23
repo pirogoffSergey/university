@@ -15,5 +15,6 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *xyLabel;
 //@property (weak, nonatomic) IBOutlet UILabel *valueLabel;
+@property (weak, nonatomic) IBOutlet UILabel *rankLabel;
 
 @end
