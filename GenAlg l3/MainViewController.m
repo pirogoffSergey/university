@@ -71,6 +71,8 @@
     GAInequality *en5 = [[GAInequality alloc] initWithA:-4 B:3 C:1];
     GAInequality *en6 = [[GAInequality alloc] initWithA:7 B:4 C:63];
 
+    // -1x1 5x2 <= 1
+
 //    [_syst addInequaly:en1];
 //    [_syst addInequaly:en2];
 //    [_syst addInequaly:en3];
