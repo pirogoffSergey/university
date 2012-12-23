@@ -11,6 +11,8 @@
 @interface PlotView ()
 {
     UIImageView *_canvas;
+    UIImageView *_dotsLayer;
+    
     NSMutableArray *_chartPointsPack; //Array of Arrays(with CGPoints packed to NSValue)
     NSMutableArray *_dropLinesPack; //Array of Arrays(with CGPoints packed to NSValue)
     NSMutableArray *_dropLinesPackOriginal; //Array of Arrays(with CGPoints packed to NSValue)
@@ -69,7 +71,10 @@
     [self buildDropLines];
     [self drawDropPack];
     [self drawChartPack];
-
+    
+    if(_dotsLayer) {
+        [self clearDotsLayer];
+    }
 }
 
 - (NSArray *)takePackOfDotsFromSet {
@@ -412,6 +417,28 @@
     UIGraphicsEndImageContext();
     
     return result;
+}
+
+
+#pragma mark -
+#pragma mark Work with 2nd Layer
+
+- (void)addBoldDotAtX:(double)x y:(double)y
+{
+    if(!_dotsLayer) {
+        _dotsLayer = [[UIImageView alloc] initWithFrame:_canvas.frame];
+        _dotsLayer.image = [self imageWithSize:_canvas.frame.size color:[UIColor clearColor]];
+        
+        [_canvas addSubview:_dotsLayer];
+    }
+    
+    CGPoint pt = [self interpritateFuncToScreenX:x y:-y];
+    [_dotsLayer setImage: [self lineFrom:pt to:CGPointMake(pt.x, pt.y) image:_dotsLayer.image withColor:[UIColor blueColor] lineWidth:5]];
+}
+
+- (void)clearDotsLayer
+{
+    [_dotsLayer setImage:[self imageWithSize:_dotsLayer.frame.size color:[UIColor clearColor]]];
 }
 
 @end

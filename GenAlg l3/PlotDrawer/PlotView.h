@@ -29,7 +29,11 @@
 
 - (id)initWithFrame:(CGRect)frame;
 - (void)redraw;
+- (void)addBoldDotAtX:(double)x y:(double)y;
+- (void)clearDotsLayer;
 
 - (NSArray *)takePackOfDotsFromSet;
 
 @end
+
+

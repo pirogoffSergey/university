@@ -56,33 +56,120 @@
 - (void)regenerateFirstPopulation
 {
     [self generateFirstPopulation];
+    self.ranks = [self ranksByGoldenbergForPopulation:_currentPopulation];
+    self.ranksOfPopulation = self.ranks;
 }
 
 - (void)calculate {
-    [self calculateRanks];
+//    [self calculateRanks];
+    
+//    [self chooseBestFromPopulation];
+    
+//    [self chooseNonComparatableIndivids];
+     
 }
 
 
 #pragma mark -
 #pragma mark MainMethods
 
-- (void)calculateRanks {
+- (void)chooseNonComparatableIndivids {
+    
+    NSArray *tmpPopulation = _currentPopulation;
+    NSArray *lastGoodPop;
+    NSArray *ranks;
+    int prevPopulationCount = 0;
+    
+    do {
+        prevPopulationCount = tmpPopulation.count;
+        ranks = [self calculateRanksForPopulation:tmpPopulation];
+        
+        
+//        for(int i=0; i<ranks.count; i++) {
+//            GAIndivid *ind = [tmpPopulation objectAtIndex:i];
+//            NSLog(@"ind : %@", [NSValue valueWithCGPoint:ind.pt]);
+//            NSLog(@"rank = %@", [ranks objectAtIndex:i]);
+//        }
+//        NSLog(@"-------------------------------");
+        lastGoodPop = [NSArray arrayWithArray:tmpPopulation];
+        tmpPopulation = [self chooseBestFromPopulation:tmpPopulation withRanks:ranks];
+        
+    }while (tmpPopulation.count);//(prevPopulationCount != tmpPopulation.count);
+    
+    
+    for(int i=0; i<lastGoodPop.count; i++) {
+        GAIndivid *ind = [lastGoodPop objectAtIndex:i];
+        NSLog(@"ind : %@", [NSValue valueWithCGPoint:ind.pt]);
+    }
+    NSLog(@"choosen %d ELEMENTS", lastGoodPop.count);
+}
+
+- (NSArray *)ranksByGoldenbergForPopulation:(NSArray *)population {
+    //все недоминирующие инд = 1
+    //удаляем их
+    //count=2
+    //новым недоминирующим инд = count
+    NSMutableArray *resultRanks = [NSMutableArray arrayWithArray:population];
+    
+    
+    NSArray *tmpPopulation = population;
+    NSMutableArray *newTmpPopulation = [NSMutableArray array];
+    int curRank = 1;
+    int tmpRank = 1;
+    
+    do {
+        [newTmpPopulation removeAllObjects];
+        for(GAIndivid *ind in tmpPopulation) {
+            tmpRank = 1;
+            for(GAIndivid *ind2 in tmpPopulation) {
+                if(ind!=ind2) {
+                    if([self isIndivid:ind dominateIndivid:ind2]) {
+                        tmpRank++;
+                    }
+                }
+            }
+            
+            if(tmpRank==1) {
+                //this is nonDominated individ
+                [resultRanks replaceObjectAtIndex:[population indexOfObject:ind] withObject:[NSNumber numberWithInt:curRank]];
+            }
+            else {
+                [newTmpPopulation addObject:ind];
+            }
+        }
+        curRank++;
+        tmpPopulation = [NSArray arrayWithArray:newTmpPopulation];
+    }while(newTmpPopulation.count != 0);
+    
+    //
+//    NSLog(@"got ranks:");
+//    for(NSNumber *n in resultRanks) {
+//        NSLog(@"rank = %d", n.intValue);
+//    }
+//    NSLog(@"");
+    return resultRanks;
+}
+
+- (NSArray *)calculateRanksForPopulation:(NSArray *)population {
     
     NSMutableArray *ranksNew = [NSMutableArray array];
     int curRank=0;
     
-    for(GAIndivid *individ in _currentPopulation) {
+    for(GAIndivid *individ in population) {
         curRank=1;
-        for(GAIndivid *individ2 in _currentPopulation) {
+        for(GAIndivid *individ2 in population) {
             if(individ!=individ2) {
+                
                 if([self isIndivid:individ dominateIndivid:individ2]) {
                     curRank++;
                 }
             }
         }
+        //NSLog(@"rank = %d",curRank);
         [ranksNew addObject: [NSNumber numberWithInt:curRank]];
     }
-    self.ranks = ranksNew;
+//    self.ranks = ranksNew;
+    return ranksNew;
 }
 
 - (void)calculateAverageFitness {
@@ -109,7 +196,18 @@
     }
 }
 
-
+- (NSArray *)chooseBestFromPopulation:(NSArray *)population withRanks:(NSArray *)ranks {
+    assert(population.count == ranks.count);
+    NSMutableArray *newPopulation = [NSMutableArray array];
+    
+    for (int i=0; i<ranks.count; i++) {
+        if(((NSNumber *)[ranks objectAtIndex:i]).intValue != 1) {
+            [newPopulation addObject: [population objectAtIndex:i]];
+        }
+    }
+//    NSLog(@"there is %d ELEMENTS for next pop", newPopulation.count);
+    return newPopulation;
+}
 
 
 #pragma mark -
@@ -119,7 +217,13 @@
  
     if(ind1.pt.x >= ind2.pt.x) {
         if(ind1.pt.y >= ind2.pt.y) {
-            return YES;
+            
+            if(ind1.pt.x == ind2.pt.x && ind1.pt.y == ind2.pt.y) {
+                return NO;
+            }
+            else {
+                return YES;
+            }
         }
     }
     return NO;
@@ -134,6 +238,17 @@
         }
     }
     return count;
+}
+
+- (int)maxIndividsRank {
+    int max = ((NSNumber *)[self.ranks objectAtIndex:0]).intValue;
+    
+    for(NSNumber *n in self.ranks) {
+        if(n.intValue > max) {
+            max = n.intValue;
+        }
+    }
+    return max;
 }
 
 
@@ -203,7 +318,7 @@
 - (NSArray *)binaryFromNumber:(int)number {
     
     int max = pow(2, self.binaryCodeLength) -1;
-    NSLog(@"number = %d", number);
+//    NSLog(@"number = %d", number);
     assert(number<max); //max allowed number exceeded
     
     NSMutableArray *result = [NSMutableArray array];

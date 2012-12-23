@@ -232,6 +232,8 @@
 
     [_tableViewControl.sections addObject:_genAlrorithmNew.firstPopulation];
     [_tableViewControl reloadTableView];
+    
+    [_plot clearDotsLayer];
 }
 
 - (IBAction)calculateAction:(id)sender {
@@ -246,6 +248,8 @@
     [_tableViewControl deselectAllCells];
     
     [_genAlrorithmNew calculate];
+    
+    [self drawDotsPopulation];
     
 //    _genAlrorithm.tableView = _tableViewControl;
 //    [_genAlrorithm start];
@@ -290,7 +294,12 @@
     return result;
 }
 
+- (void)drawDotsPopulation {
 
+    for(GAIndivid *ind in _genAlrorithmNew.firstPopulation) {
+        [_plot addBoldDotAtX:ind.pt.x y:ind.pt.y];
+    }
+}
 
 #pragma mark -
 #pragma mark Checkers

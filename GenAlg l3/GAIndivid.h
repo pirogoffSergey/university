@@ -14,6 +14,7 @@
 @property (nonatomic, strong) NSArray *binaryCodeY;
 
 @property (nonatomic, assign) CGPoint pt; //(x,y)
+@property (nonatomic, assign) int rank;
 
 - (id)initWithBinCodeX:(NSArray *)binCode1 binCodeY:(NSArray *)binCode2 fitness:(CGPoint)pt;
 
