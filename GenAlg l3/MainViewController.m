@@ -64,12 +64,21 @@
     _plot.rightBorder = 20;
     
     _syst = [GAInequalitiesSystem new];
-    GAInequality *en1 = [[GAInequality alloc] initWithA:-1 B:3 C:6];
-    GAInequality *en2 = [[GAInequality alloc] initWithA:-3 B:2 C:-3];
-    GAInequality *en3 = [[GAInequality alloc] initWithA:6 B:2 C:42];
-    [_syst addInequaly:en1];
-    [_syst addInequaly:en2];
-    [_syst addInequaly:en3];
+//    GAInequality *en1 = [[GAInequality alloc] initWithA:-1 B:3 C:6];
+//    GAInequality *en2 = [[GAInequality alloc] initWithA:-3 B:2 C:-3];
+//    GAInequality *en3 = [[GAInequality alloc] initWithA:6 B:2 C:42];
+    GAInequality *en4 = [[GAInequality alloc] initWithA:-2 B:2 C:2];
+    GAInequality *en5 = [[GAInequality alloc] initWithA:-4 B:3 C:1];
+    GAInequality *en6 = [[GAInequality alloc] initWithA:7 B:4 C:63];
+
+//    [_syst addInequaly:en1];
+//    [_syst addInequaly:en2];
+//    [_syst addInequaly:en3];
+    
+    [_syst addInequaly:en4];
+    [_syst addInequaly:en5];
+    [_syst addInequaly:en6];
+
 
     _plot.ineqSystem = _syst;
     _ineqTableControl.system = _syst;
