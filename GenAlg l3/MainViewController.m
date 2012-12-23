@@ -228,9 +228,9 @@
     _tableViewControl.sections = nil;
     _tableViewControl.sections = [NSMutableArray new];
     [_tableViewControl reloadTableView];
-//    [_genAlrorithm regenerateFirstPopulation];
+    [_genAlrorithmNew regenerateFirstPopulation];
 
-  //  [_tableViewControl.sections addObject:_genAlrorithm.firstPopulation];
+    [_tableViewControl.sections addObject:_genAlrorithmNew.firstPopulation];
     [_tableViewControl reloadTableView];
 }
 
@@ -248,7 +248,7 @@
 //    _genAlrorithm.tableView = _tableViewControl;
 //    [_genAlrorithm start];
     
-    [_tableViewControl selectCellsWithMaxElements];
+//    [_tableViewControl selectCellsWithMaxElements];
 }
 
 - (void)handleDoubleTap:(UITapGestureRecognizer*)sender

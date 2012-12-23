@@ -50,6 +50,11 @@
     self.firstPopulation = self.currentPopulation;
 }
 
+- (void)regenerateFirstPopulation
+{
+    [self generateFirstPopulation];
+}
+
 
 #pragma mark -
 #pragma mark Convertations

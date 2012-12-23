@@ -29,5 +29,6 @@
 @property (nonatomic, strong) NSArray *packOfDotsFromSet; //Array of Arrays(with CGPoints packed to NSValue)
 
 - (void)generateFirstPopulation;
+- (void)regenerateFirstPopulation;
 
 @end
