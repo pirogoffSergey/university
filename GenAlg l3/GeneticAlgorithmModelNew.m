@@ -60,9 +60,22 @@
     }
     
     NSArray *paretoElems = [self findNonDomanativeIndividsFromPopulation:_currentPopulation];
+    NSArray *optimized;
+    NSMutableArray *newParetoElems = [NSMutableArray array];
+    
     for(GAIndivid *ind in paretoElems) {
         NSLog(@"pt: %@",[NSValue valueWithCGPoint:ind.pt]);
+        optimized = [self optimizeIndivid:ind];
+        for(GAIndivid *optInd in optimized) {
+            [newParetoElems addObject:optInd];
+        }
     }
+    
+    NSLog(@"------------");
+    for(GAIndivid *ind in newParetoElems) {
+        NSLog(@"new pt: %@",[NSValue valueWithCGPoint:ind.pt]);
+    }
+    
 }
 
 - (void)regenerateFirstPopulation
@@ -121,18 +134,9 @@
     do {
         prevPopulationCount = tmpPopulation.count;
         ranks = [self calculateRanksForPopulation:tmpPopulation];
-        
-        
-//        for(int i=0; i<ranks.count; i++) {
-//            GAIndivid *ind = [tmpPopulation objectAtIndex:i];
-//            NSLog(@"ind : %@", [NSValue valueWithCGPoint:ind.pt]);
-//            NSLog(@"rank = %@", [ranks objectAtIndex:i]);
-//        }
-//        NSLog(@"-------------------------------");
         lastGoodPop = [NSArray arrayWithArray:tmpPopulation];
         tmpPopulation = [self chooseBestFromPopulation:tmpPopulation withRanks:ranks];
-        
-    }while (tmpPopulation.count);//(prevPopulationCount != tmpPopulation.count);
+    }while (tmpPopulation.count);
     
     
     for(int i=0; i<lastGoodPop.count; i++) {
@@ -178,13 +182,6 @@
         curRank++;
         tmpPopulation = [NSArray arrayWithArray:newTmpPopulation];
     }while(newTmpPopulation.count != 0);
-    
-    //
-//    NSLog(@"got ranks:");
-//    for(NSNumber *n in resultRanks) {
-//        NSLog(@"rank = %d", n.intValue);
-//    }
-//    NSLog(@"");
     return resultRanks;
 }
 
@@ -203,10 +200,8 @@
                 }
             }
         }
-        //NSLog(@"rank = %d",curRank);
         [ranksNew addObject: [NSNumber numberWithInt:curRank]];
     }
-//    self.ranks = ranksNew;
     return ranksNew;
 }
 
@@ -243,7 +238,6 @@
             [newPopulation addObject: [population objectAtIndex:i]];
         }
     }
-//    NSLog(@"there is %d ELEMENTS for next pop", newPopulation.count);
     return newPopulation;
 }
 
@@ -289,6 +283,71 @@
     return max;
 }
 
+- (NSArray *)optimizeIndivid:(GAIndivid *)individ {
+    
+    CGPoint pt = individ.pt;
+    if(![self.ineqSystem doesDotBelongToSystem:pt]) {
+        return nil;
+    }
+  
+    //try optimize by x
+    double maxXdelta = 0;
+    double h = 0.1;
+    for(double i=h; i<=20; i+=h) {
+        pt = CGPointMake(pt.x+i, pt.y);
+        if(![self.ineqSystem doesDotBelongToSystem:pt]) {
+            maxXdelta = i-h;
+            break;
+        }
+    }
+    
+    //try optimize by y
+    double maxYdelta = 0;
+    for(double i=h; i<=20; i+=h) {
+        pt = CGPointMake(pt.x, pt.y+h);
+        if(![self.ineqSystem doesDotBelongToSystem:pt]) {
+            maxYdelta = i-h;
+            break;
+        }
+    }
+    
+    
+    //analise results
+    if(maxXdelta==0 && maxYdelta==0) {
+        return [NSArray arrayWithObject:individ];
+    }
+    
+    
+    if(maxXdelta!=0 && maxYdelta!=0) {
+        pt = CGPointMake(individ.pt.x + maxXdelta, individ.pt.y + maxYdelta);
+        if([self.ineqSystem doesDotBelongToSystem:pt]) {
+            GAIndivid *optimizedIndivid = [[GAIndivid alloc] initWithBinCodeX:individ.binaryCodeX binCodeY:individ.binaryCodeY fitness:pt];
+            return [NSArray arrayWithObject:optimizedIndivid];
+        }
+        else {
+            pt = CGPointMake(individ.pt.x + maxXdelta, individ.pt.y);
+            GAIndivid *ind1 = [[GAIndivid alloc] initWithBinCodeX:individ.binaryCodeX binCodeY:individ.binaryCodeY fitness:pt];
+            
+            pt = CGPointMake(individ.pt.x, individ.pt.y+maxYdelta);
+            GAIndivid *ind2 = [[GAIndivid alloc] initWithBinCodeX:individ.binaryCodeX binCodeY:individ.binaryCodeY fitness:pt];
+            
+            return [NSArray arrayWithObjects:ind1, ind2, nil];
+        }
+    }
+    else {
+        if(maxXdelta != 0) {
+            pt = CGPointMake(individ.pt.x + maxXdelta, individ.pt.y);            
+            GAIndivid *optimizedIndivid = [[GAIndivid alloc] initWithBinCodeX:individ.binaryCodeX binCodeY:individ.binaryCodeY fitness:pt];
+            return [NSArray arrayWithObject:optimizedIndivid];
+        }
+        else {
+            pt = CGPointMake(individ.pt.x, individ.pt.y+maxYdelta);
+            GAIndivid *optimizedIndivid = [[GAIndivid alloc] initWithBinCodeX:individ.binaryCodeX binCodeY:individ.binaryCodeY fitness:pt];
+            return [NSArray arrayWithObject:optimizedIndivid];
+        }
+    }
+    return nil;
+}
 
 #pragma mark -
 #pragma mark Rands
