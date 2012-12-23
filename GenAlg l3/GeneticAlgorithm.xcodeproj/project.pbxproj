@@ -13,6 +13,9 @@
 		301B16D01601C03E002D43CB /* CustomTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 301B16CE1601C03E002D43CB /* CustomTableViewController.xib */; };
 		306708A816830302003C5E57 /* GeneticAlgorithmModelNew.m in Sources */ = {isa = PBXBuildFile; fileRef = 306708A716830302003C5E57 /* GeneticAlgorithmModelNew.m */; };
 		306708AE1683083B003C5E57 /* GAInequalitiesSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 306708AD1683083B003C5E57 /* GAInequalitiesSystem.m */; };
+		30695BEA168788FD00E45FD9 /* IneqCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 30695BE9168788FD00E45FD9 /* IneqCell.m */; };
+		30695BEC1687890C00E45FD9 /* IneqCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30695BEB1687890C00E45FD9 /* IneqCellView.xib */; };
+		30695BF016878B3600E45FD9 /* IneqTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30695BEF16878B3600E45FD9 /* IneqTableController.m */; };
 		3075383A16061C6600AD053F /* GAIndivid.m in Sources */ = {isa = PBXBuildFile; fileRef = 3075383916061C6600AD053F /* GAIndivid.m */; };
 		3090B7671682F05500CECC1F /* IndividCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3090B7661682F05500CECC1F /* IndividCell.m */; };
 		3090B7691682F0F100CECC1F /* IndividCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3090B7681682F0F100CECC1F /* IndividCellView.xib */; };
@@ -39,6 +42,11 @@
 		306708A716830302003C5E57 /* GeneticAlgorithmModelNew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneticAlgorithmModelNew.m; sourceTree = "<group>"; };
 		306708AC1683083B003C5E57 /* GAInequalitiesSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAInequalitiesSystem.h; sourceTree = "<group>"; };
 		306708AD1683083B003C5E57 /* GAInequalitiesSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GAInequalitiesSystem.m; sourceTree = "<group>"; };
+		30695BE8168788FD00E45FD9 /* IneqCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IneqCell.h; sourceTree = "<group>"; };
+		30695BE9168788FD00E45FD9 /* IneqCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IneqCell.m; sourceTree = "<group>"; };
+		30695BEB1687890C00E45FD9 /* IneqCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IneqCellView.xib; sourceTree = "<group>"; };
+		30695BEE16878B3600E45FD9 /* IneqTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IneqTableController.h; sourceTree = "<group>"; };
+		30695BEF16878B3600E45FD9 /* IneqTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IneqTableController.m; sourceTree = "<group>"; };
 		3075383816061C6600AD053F /* GAIndivid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAIndivid.h; path = ../GAIndivid.h; sourceTree = "<group>"; };
 		3075383916061C6600AD053F /* GAIndivid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GAIndivid.m; path = ../GAIndivid.m; sourceTree = "<group>"; };
 		3090B7651682F05500CECC1F /* IndividCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndividCell.h; sourceTree = "<group>"; };
@@ -102,6 +110,25 @@
 			path = Individ;
 			sourceTree = "<group>";
 		};
+		30695BE31687888F00E45FD9 /* IneqCellView */ = {
+			isa = PBXGroup;
+			children = (
+				30695BE8168788FD00E45FD9 /* IneqCell.h */,
+				30695BE9168788FD00E45FD9 /* IneqCell.m */,
+				30695BEB1687890C00E45FD9 /* IneqCellView.xib */,
+			);
+			path = IneqCellView;
+			sourceTree = "<group>";
+		};
+		30695BED16878B0900E45FD9 /* IneqTableView */ = {
+			isa = PBXGroup;
+			children = (
+				30695BEE16878B3600E45FD9 /* IneqTableController.h */,
+				30695BEF16878B3600E45FD9 /* IneqTableController.m */,
+			);
+			path = IneqTableView;
+			sourceTree = "<group>";
+		};
 		3075383616061C2C00AD053F /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -138,7 +165,9 @@
 		30DCA7E81601ABA100198B5F = {
 			isa = PBXGroup;
 			children = (
+				30695BE31687888F00E45FD9 /* IneqCellView */,
 				30E542FC16862D470031D480 /* CustomTableView */,
+				30695BED16878B0900E45FD9 /* IneqTableView */,
 				3090B7611682EE6400CECC1F /* CellView */,
 				30DB489916261397002958EB /* PlotDrawer */,
 				3075383616061C2C00AD053F /* Model */,
@@ -255,6 +284,7 @@
 				30DCA8171601AC2000198B5F /* MainViewController.xib in Resources */,
 				301B16D01601C03E002D43CB /* CustomTableViewController.xib in Resources */,
 				3090B7691682F0F100CECC1F /* IndividCellView.xib in Resources */,
+				30695BEC1687890C00E45FD9 /* IneqCellView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,6 +306,8 @@
 				306708A816830302003C5E57 /* GeneticAlgorithmModelNew.m in Sources */,
 				306708AE1683083B003C5E57 /* GAInequalitiesSystem.m in Sources */,
 				30015A801685F73200014433 /* GAInequality.m in Sources */,
+				30695BEA168788FD00E45FD9 /* IneqCell.m in Sources */,
+				30695BF016878B3600E45FD9 /* IneqTableController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

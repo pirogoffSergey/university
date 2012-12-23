@@ -8,6 +8,7 @@
 
 #import "MainViewController.h"
 #import "CustomTableViewController.h"
+#import "IneqTableController.h"
 #import "GeneticAlgorithmModel.h"
 #import "GeneticAlgorithmModelNew.h"
 
@@ -19,17 +20,12 @@
 #define A0_PARAM_FIELD 1
 #define A1_PARAM_FIELD 2
 #define A2_PARAM_FIELD 3
-#define A3_PARAM_FIELD 4
-#define A4_PARAM_FIELD 5
-
-
-#define LEFT_BORDER_FIELD 6
-#define RIGHT_BORDER_FIELD 7
 
 
 @interface MainViewController () <UITextFieldDelegate>
 {
     CustomTableViewController *_tableViewControl;
+    IneqTableController *_ineqTableControl;
     
     GeneticAlgorithmModelNew *_genAlrorithmNew;
     GAInequalitiesSystem *_syst;
@@ -51,23 +47,16 @@
     _tableViewControl = [[CustomTableViewController alloc] initWithFrame:resultsTableView.frame];
     [self.view addSubview:_tableViewControl.tableView];
     
+    _ineqTableControl = [[IneqTableController alloc] initWithFrame:self.inequalitiesTableView.frame];
+    [self.view addSubview:_ineqTableControl.tableView];
+    
+    
     self.a0ParamLabel.delegate = self;
     self.a0ParamLabel.tag = A0_PARAM_FIELD;
     self.a1ParamLabel.delegate = self;
     self.a1ParamLabel.tag = A1_PARAM_FIELD;
     self.a2ParamLabel.delegate = self;
-    self.a2ParamLabel.tag = A2_PARAM_FIELD;
-    self.a3ParamLabel.delegate = self;
-    self.a3ParamLabel.tag = A3_PARAM_FIELD;
-    self.a4ParamLabel.delegate = self;
-    self.a4ParamLabel.tag = A4_PARAM_FIELD;
-    
-    self.leftBorderLabel.delegate = self;
-    self.leftBorderLabel.tag = LEFT_BORDER_FIELD;
-    self.rightBorderLabel.delegate = self;
-    self.rightBorderLabel.tag = RIGHT_BORDER_FIELD;
-    
-    
+    self.a2ParamLabel.tag = A2_PARAM_FIELD;    
     
     // PLOT
     _plot = [[PlotView alloc] initWithFrame:self.placeForPlot.frame];
@@ -83,6 +72,8 @@
     [_syst addInequaly:en3];
 
     _plot.ineqSystem = _syst;
+    _ineqTableControl.system = _syst;
+//    [_ineqTableControl reloadTableView];
     
     [self.placeForPlot removeFromSuperview];
     [self.view addSubview:_plot];
@@ -169,50 +160,6 @@
             }
             break;
         
-        case A3_PARAM_FIELD:
-            //check isValidData
-            if(![self isContainsNumber:textField.text]) {
- //               textField.text = [NSString stringWithFormat:@"%d",_genAlrorithm.a3Param];
-                return;
-            }
-            else {
- //               _genAlrorithm.a3Param = [textField.text intValue];
-            }
-            break;
-            
-        case A4_PARAM_FIELD:
-            //check isValidData
-            if(![self isContainsNumber:textField.text]) {
- //               textField.text = [NSString stringWithFormat:@"%d",_genAlrorithm.a4Param];
-                return;
-            }
-            else {
-  //              _genAlrorithm.a4Param = [textField.text intValue];
-            }
-            break;
-            
-        case LEFT_BORDER_FIELD:
-            //check isValidData
-            if(![self isContainsNumber:textField.text]) {
-  //              textField.text = [NSString stringWithFormat:@"%d",_genAlrorithm.leftBorder];
-                return;
-            }
-            else {
-  //              _genAlrorithm.leftBorder = [textField.text intValue];
-            }
-            break;
-            
-        case RIGHT_BORDER_FIELD:
-            //check isValidData
-            if(![self isContainsNumber:textField.text]) {
-//                textField.text = [NSString stringWithFormat:@"%d",_genAlrorithm.rightBorder];
-                return;
-            }
-            else {
-//                _genAlrorithm.rightBorder = [textField.text intValue];
-            }
-            break;
-            
         default:
             [NSException raise:@"TextField exception" format:@"Some exception with identification of textField"];
             break;
@@ -236,15 +183,7 @@
     [_tableViewControl reloadTableView];
     
     [_plot clearDotsLayer];
-    
     [self drawDotsPopulation];
-}
-
-- (IBAction)calculateAction:(id)sender {
-    
-//    NSArray *result = [_genAlrorithm nextIteration];
-//    [_tableViewControl.sections addObject:result];
-//    [_tableViewControl reloadTableView];
 }
 
 - (IBAction)startAction:(id)sender {
@@ -252,13 +191,20 @@
     [_tableViewControl deselectAllCells];
     
     NSArray *paretoDots = [_genAlrorithmNew calculate];
-    
     [self drawParetoDots:paretoDots];
+}
+
+- (IBAction)addIneq:(id)sender {
+    NSLog(@"addIneq");
     
-//    _genAlrorithm.tableView = _tableViewControl;
-//    [_genAlrorithm start];
+    int a = self.a0ParamLabel.text.intValue;
+    int b = self.a1ParamLabel.text.intValue;
+    int c = self.a2ParamLabel.text.intValue;
     
-//    [_tableViewControl selectCellsWithMaxElements];
+    GAInequality *en = [[GAInequality alloc] initWithA:a B:b C:c];
+    [_syst addInequaly:en];
+    
+    [_ineqTableControl reloadTableView];
 }
 
 - (void)handleDoubleTap:(UITapGestureRecognizer*)sender
@@ -324,9 +270,7 @@
         return NO;
     }
     
-    
     BOOL isContainsDot = NO;
-    
     for(int i=0; i<[string length]; i++) {
         
         //if "-" value
@@ -345,10 +289,13 @@
             return NO;
         }
     }
-    
     return YES;
 }
 
+- (void)viewDidUnload {
+    [self setInequalitiesTableView:nil];
+    [super viewDidUnload];
+}
 @end
 
 

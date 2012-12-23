@@ -17,4 +17,6 @@
 
 - (NSArray *)allInequalities;
 
+- (int)count;
+
 @end

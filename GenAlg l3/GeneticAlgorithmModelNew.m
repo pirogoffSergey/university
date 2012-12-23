@@ -52,7 +52,8 @@
     self.currentPopulation = population;
     self.firstPopulation = self.currentPopulation;
     
-    self.ranks = [self ranksByGoldenbergForPopulation:_currentPopulation];
+//    self.ranks = [self ranksByGoldenbergForPopulation:_currentPopulation];
+    self.ranks = [self calculateRanksForPopulation:_currentPopulation];
     GAIndivid *individ;
     for(int i=0; i<self.ranks.count; i++) {
         individ = [self.currentPopulation objectAtIndex:i];
@@ -314,7 +315,6 @@
     if(maxXdelta==0 && maxYdelta==0) {
         return [NSArray arrayWithObject:individ];
     }
-    
     
     if(maxXdelta!=0 && maxYdelta!=0) {
         pt = CGPointMake(individ.pt.x + maxXdelta, individ.pt.y + maxYdelta);

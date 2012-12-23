@@ -52,6 +52,10 @@
     return self.system;
 }
 
+- (int)count {
+    return self.system.count;
+}
+
 @end
 
 
