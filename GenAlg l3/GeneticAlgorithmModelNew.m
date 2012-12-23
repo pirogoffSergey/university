@@ -67,9 +67,7 @@
 
 - (NSArray *)calculate {
 //    [self calculateRanks];
-    
 //    [self chooseBestFromPopulation];
-    
 //    [self chooseNonComparatableIndivids];
     
     NSArray *paretoElems = [self findNonDomanativeIndividsFromPopulation:_currentPopulation];
@@ -77,17 +75,17 @@
     NSMutableArray *newParetoElems = [NSMutableArray array];
     
     for(GAIndivid *ind in paretoElems) {
-//        NSLog(@"pt: %@",[NSValue valueWithCGPoint:ind.pt]);
+        NSLog(@"pt: %@",[NSValue valueWithCGPoint:ind.pt]);
         optimized = [self optimizeIndivid:ind];
         for(GAIndivid *optInd in optimized) {
             [newParetoElems addObject:optInd];
         }
     }
     
-//    NSLog(@"------------");
-//    for(GAIndivid *ind in newParetoElems) {
-//        NSLog(@"new pt: %@",[NSValue valueWithCGPoint:ind.pt]);
-//    }
+    NSLog(@"------------");
+    for(GAIndivid *ind in newParetoElems) {
+        NSLog(@"new pt: %@",[NSValue valueWithCGPoint:ind.pt]);
+    }
     return newParetoElems;
 }
 
@@ -291,7 +289,7 @@
   
     //try optimize by x
     double maxXdelta = 0;
-    double h = 0.1;
+    double h = 0.05;
     for(double i=h; i<=20; i+=h) {
         pt = CGPointMake(pt.x+i, pt.y);
         if(![self.ineqSystem doesDotBelongToSystem:pt]) {
@@ -302,6 +300,7 @@
     
     //try optimize by y
     double maxYdelta = 0;
+    pt = individ.pt;
     for(double i=h; i<=20; i+=h) {
         pt = CGPointMake(pt.x, pt.y+h);
         if(![self.ineqSystem doesDotBelongToSystem:pt]) {
@@ -321,7 +320,7 @@
         pt = CGPointMake(individ.pt.x + maxXdelta, individ.pt.y + maxYdelta);
         if([self.ineqSystem doesDotBelongToSystem:pt]) {
             GAIndivid *optimizedIndivid = [[GAIndivid alloc] initWithBinCodeX:individ.binaryCodeX binCodeY:individ.binaryCodeY fitness:pt];
-            return [NSArray arrayWithObject:optimizedIndivid];
+            return [self optimizeIndivid:optimizedIndivid];//[NSArray arrayWithObject:optimizedIndivid];
         }
         else {
             pt = CGPointMake(individ.pt.x + maxXdelta, individ.pt.y);
@@ -330,19 +329,25 @@
             pt = CGPointMake(individ.pt.x, individ.pt.y+maxYdelta);
             GAIndivid *ind2 = [[GAIndivid alloc] initWithBinCodeX:individ.binaryCodeX binCodeY:individ.binaryCodeY fitness:pt];
             
-            return [NSArray arrayWithObjects:ind1, ind2, nil];
+            NSArray *o1 = [self optimizeIndivid:ind1];
+            NSArray *o2 = [self optimizeIndivid:ind2];
+            NSMutableArray *res = [NSMutableArray arrayWithArray:o1];
+            for(GAIndivid *n in o2) {
+                [res addObject:n];
+            }
+            return res;//[NSArray arrayWithObjects:ind1, ind2, nil];
         }
     }
     else {
         if(maxXdelta != 0) {
             pt = CGPointMake(individ.pt.x + maxXdelta, individ.pt.y);            
             GAIndivid *optimizedIndivid = [[GAIndivid alloc] initWithBinCodeX:individ.binaryCodeX binCodeY:individ.binaryCodeY fitness:pt];
-            return [NSArray arrayWithObject:optimizedIndivid];
+            return [self optimizeIndivid:optimizedIndivid];//[NSArray arrayWithObject:optimizedIndivid];
         }
         else {
             pt = CGPointMake(individ.pt.x, individ.pt.y+maxYdelta);
             GAIndivid *optimizedIndivid = [[GAIndivid alloc] initWithBinCodeX:individ.binaryCodeX binCodeY:individ.binaryCodeY fitness:pt];
-            return [NSArray arrayWithObject:optimizedIndivid];
+            return [self optimizeIndivid:optimizedIndivid];//[NSArray arrayWithObject:optimizedIndivid];
         }
     }
     return nil;
