@@ -191,7 +191,9 @@
 - (void)buildChartDots
 {
     assert((_rightBorder-_leftBorder) > 0);
-        
+
+    [_chartPointsPack removeAllObjects];
+    
     float step = 0.01;
     float y1 = 0;
     float y2 = 0;
@@ -257,6 +259,9 @@
 }
 
 - (void)buildDropLines {
+    
+    [_dropLinesPack removeAllObjects];
+    [_dropLinesPackOriginal removeAllObjects];
     
     NSMutableArray *linePoints;
     NSMutableArray *linePointsOriginal;

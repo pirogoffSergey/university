@@ -73,7 +73,6 @@
 
     _plot.ineqSystem = _syst;
     _ineqTableControl.system = _syst;
-//    [_ineqTableControl reloadTableView];
     
     [self.placeForPlot removeFromSuperview];
     [self.view addSubview:_plot];
@@ -126,46 +125,7 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    switch (textField.tag) {
-        case A0_PARAM_FIELD:
-            //check isValidData
-            if(![self isContainsNumber:textField.text]) {
-//                textField.text = [NSString stringWithFormat:@"%d",_genAlrorithm.a0Param];
-                return;
-            }
-            else {
-//                _genAlrorithm.a0Param = [textField.text intValue];
-            }
-            break;
-        
-        case A1_PARAM_FIELD:
-            //check isValidData
-            if(![self isContainsNumber:textField.text]) {
-//                textField.text = [NSString stringWithFormat:@"%d",_genAlrorithm.a1Param];
-                return;
-            }
-            else {
-//                _genAlrorithm.a1Param = [textField.text intValue];
-            }
-            break;
-            
-        case A2_PARAM_FIELD:
-            //check isValidData
-            if(![self isContainsNumber:textField.text]) {
-//                textField.text = [NSString stringWithFormat:@"%d",_genAlrorithm.a2Param];
-                return;
-            }
-            else {
-//                _genAlrorithm.a2Param = [textField.text intValue];
-            }
-            break;
-        
-        default:
-            [NSException raise:@"TextField exception" format:@"Some exception with identification of textField"];
-            break;
-    }
-    
-    [self regenerateAction:nil];
+ //   [self regenerateAction:nil];
 }
 
 
@@ -205,6 +165,7 @@
     [_syst addInequaly:en];
     
     [_ineqTableControl reloadTableView];
+    [self regenerateAction:nil];
 }
 
 - (void)handleDoubleTap:(UITapGestureRecognizer*)sender
@@ -217,9 +178,16 @@
 - (void)redrawPlot {
     
     _isRedrawingNow = YES;
-    [self.view addSubview:self.activIndicator];
-    [self.activIndicator startAnimating];
+    
+    
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        [self.view addSubview:self.activIndicator];
+//        [self.activIndicator startAnimating];
+//    });
+    
     dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        [self.view addSubview:self.activIndicator];
+        [self.activIndicator startAnimating];
         [_plot redraw];
         NSLog(@"called1");
     });
