@@ -11,7 +11,8 @@
 
 @interface GeneticAlgorithmModelNew ()
 
-@property (nonatomic, strong) NSArray *currentPopulation;
+@property (nonatomic, strong) NSArray *currentPopulation; //array of GAIndivids
+@property (nonatomic, strong) NSArray *ranks; //arrat of NSNumber
 
 @end
 
@@ -27,13 +28,15 @@
         
         _leftBorderX = 0;
         _rightBorderX = 20;
+        
+        _ranks = [NSArray array];
     }    
     return self;
 }
 
 
 #pragma mark -
-#pragma mark MainMethods
+#pragma mark Public Methods
 
 - (void)generateFirstPopulation {
     NSMutableArray *population = [NSMutableArray array];
@@ -55,9 +58,50 @@
     [self generateFirstPopulation];
 }
 
+- (void)calculate {
+    [self calculateRanks];
+}
+
 
 #pragma mark -
-#pragma mark Convertations
+#pragma mark MainMethods
+
+- (void)calculateRanks {
+    
+    NSMutableArray *ranksNew = [NSMutableArray array];
+    int curRank=0;
+    
+    for(GAIndivid *individ in _currentPopulation) {
+        curRank=1;
+        for(GAIndivid *individ2 in _currentPopulation) {
+            if(individ!=individ2) {
+                if([self isIndivid:individ dominateIndivid:individ2]) {
+                    curRank++;
+                }
+            }
+        }
+        [ranksNew addObject: [NSNumber numberWithInt:curRank]];
+    }
+    self.ranks = ranksNew;
+}
+
+
+#pragma mark -
+#pragma mark SubMethods
+
+- (BOOL)isIndivid:(GAIndivid *)ind1 dominateIndivid:(GAIndivid *)ind2 {
+ 
+    if(ind1.pt.x >= ind2.pt.x) {
+        if(ind1.pt.y >= ind2.pt.y) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+
+#pragma mark -
+#pragma mark Rands
 
 - (NSArray *)randBinIndivid
 {
@@ -96,9 +140,8 @@
 }
 
 
-
 #pragma mark -
-#pragma mark Some math Methods
+#pragma mark Convertations
 
 // bin -> int (simply converts number in BINary to INTeger)
 - (int)numberFromBinary:(NSArray *)binaryCode
@@ -152,7 +195,6 @@
     NSArray *arr = [self binaryFromNumber:B];
     return arr;
 }
-
 
 @end
 

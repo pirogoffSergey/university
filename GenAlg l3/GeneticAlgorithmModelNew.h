@@ -31,4 +31,6 @@
 - (void)generateFirstPopulation;
 - (void)regenerateFirstPopulation;
 
+- (void)calculate;
+
 @end
