@@ -32,6 +32,6 @@
 - (void)generateFirstPopulation;
 - (void)regenerateFirstPopulation;
 
-- (void)calculate;
+- (NSArray *)calculate;
 
 @end

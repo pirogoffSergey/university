@@ -423,7 +423,7 @@
 #pragma mark -
 #pragma mark Work with 2nd Layer
 
-- (void)addBoldDotAtX:(double)x y:(double)y
+- (void)addBoldDotAtX:(double)x y:(double)y withColor:(UIColor *)color width:(int)lineWidth
 {
     if(!_dotsLayer) {
         _dotsLayer = [[UIImageView alloc] initWithFrame:_canvas.frame];
@@ -433,7 +433,7 @@
     }
     
     CGPoint pt = [self interpritateFuncToScreenX:x y:-y];
-    [_dotsLayer setImage: [self lineFrom:pt to:CGPointMake(pt.x, pt.y) image:_dotsLayer.image withColor:[UIColor blueColor] lineWidth:5]];
+    [_dotsLayer setImage: [self lineFrom:pt to:CGPointMake(pt.x, pt.y) image:_dotsLayer.image withColor:color lineWidth:lineWidth]];
 }
 
 - (void)clearDotsLayer

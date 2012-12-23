@@ -108,6 +108,8 @@
     
     [_tableViewControl.sections addObject:_genAlrorithmNew.firstPopulation];
     [_tableViewControl reloadTableView];
+    
+    [self drawDotsPopulation];
 
 }
 
@@ -234,6 +236,8 @@
     [_tableViewControl reloadTableView];
     
     [_plot clearDotsLayer];
+    
+    [self drawDotsPopulation];
 }
 
 - (IBAction)calculateAction:(id)sender {
@@ -247,9 +251,9 @@
     
     [_tableViewControl deselectAllCells];
     
-    [_genAlrorithmNew calculate];
+    NSArray *paretoDots = [_genAlrorithmNew calculate];
     
-    [self drawDotsPopulation];
+    [self drawParetoDots:paretoDots];
     
 //    _genAlrorithm.tableView = _tableViewControl;
 //    [_genAlrorithm start];
@@ -297,7 +301,14 @@
 - (void)drawDotsPopulation {
 
     for(GAIndivid *ind in _genAlrorithmNew.firstPopulation) {
-        [_plot addBoldDotAtX:ind.pt.x y:ind.pt.y];
+        [_plot addBoldDotAtX:ind.pt.x y:ind.pt.y withColor:[UIColor blueColor] width:5];
+    }
+}
+
+- (void)drawParetoDots:(NSArray *)arr {
+
+    for(GAIndivid *ind in arr) {
+        [_plot addBoldDotAtX:ind.pt.x y:ind.pt.y withColor:[UIColor redColor] width:9];
     }
 }
 

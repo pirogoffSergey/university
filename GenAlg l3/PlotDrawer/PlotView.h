@@ -29,7 +29,7 @@
 
 - (id)initWithFrame:(CGRect)frame;
 - (void)redraw;
-- (void)addBoldDotAtX:(double)x y:(double)y;
+- (void)addBoldDotAtX:(double)x y:(double)y withColor:(UIColor *)color width:(int)lineWidth;
 - (void)clearDotsLayer;
 
 - (NSArray *)takePackOfDotsFromSet;

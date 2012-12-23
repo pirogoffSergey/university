@@ -58,24 +58,6 @@
         individ = [self.currentPopulation objectAtIndex:i];
         individ.rank = ((NSNumber *)[self.ranks objectAtIndex:i]).intValue;
     }
-    
-    NSArray *paretoElems = [self findNonDomanativeIndividsFromPopulation:_currentPopulation];
-    NSArray *optimized;
-    NSMutableArray *newParetoElems = [NSMutableArray array];
-    
-    for(GAIndivid *ind in paretoElems) {
-        NSLog(@"pt: %@",[NSValue valueWithCGPoint:ind.pt]);
-        optimized = [self optimizeIndivid:ind];
-        for(GAIndivid *optInd in optimized) {
-            [newParetoElems addObject:optInd];
-        }
-    }
-    
-    NSLog(@"------------");
-    for(GAIndivid *ind in newParetoElems) {
-        NSLog(@"new pt: %@",[NSValue valueWithCGPoint:ind.pt]);
-    }
-    
 }
 
 - (void)regenerateFirstPopulation
@@ -83,13 +65,30 @@
     [self generateFirstPopulation];
 }
 
-- (void)calculate {
+- (NSArray *)calculate {
 //    [self calculateRanks];
     
 //    [self chooseBestFromPopulation];
     
 //    [self chooseNonComparatableIndivids];
-     
+    
+    NSArray *paretoElems = [self findNonDomanativeIndividsFromPopulation:_currentPopulation];
+    NSArray *optimized;
+    NSMutableArray *newParetoElems = [NSMutableArray array];
+    
+    for(GAIndivid *ind in paretoElems) {
+//        NSLog(@"pt: %@",[NSValue valueWithCGPoint:ind.pt]);
+        optimized = [self optimizeIndivid:ind];
+        for(GAIndivid *optInd in optimized) {
+            [newParetoElems addObject:optInd];
+        }
+    }
+    
+//    NSLog(@"------------");
+//    for(GAIndivid *ind in newParetoElems) {
+//        NSLog(@"new pt: %@",[NSValue valueWithCGPoint:ind.pt]);
+//    }
+    return newParetoElems;
 }
 
 
